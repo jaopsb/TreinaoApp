@@ -1,29 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
-import { Feather } from '@expo/vector-icons'
 import dummy from '../Dummy.json'
+import { connect } from 'react-redux'
+import { withNavigation } from 'react-navigation'
+import { ScrollView, FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { deepPurple, green, blue, white } from '../colors'
+import { getListTrainAndTypes } from '../helpers';
 
-import Treinos from '../components/Treinos'
-import { receiveExecs } from '../redux/actions';
-import { gold, deepPurple, green, blue, purple, white } from '../colors'
+class Treinos extends React.Component {
 
-
-class HomeScreen extends React.Component {
-  state = {
-    carregando: true
-  }
-
-  componentDidMount() {
-    this.props.setInitialDummyData()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { carregando } = nextProps
-    this.setState({ carregando })
-  }
-
-  //Transformar em Component Treinos
   keyExtractor = (item, index) => `${index}`
 
   renderItem = ({ item }) => {
@@ -45,26 +29,17 @@ class HomeScreen extends React.Component {
       ))
     )
   }
-  //Transformar em Component Treinos
 
   render() {
-    const { carregando } = this.state
-
+    const { treinos } = this.props
     return (
-      <View style={styles.container}>
-        {
-          !carregando ?
-            <Treinos />
-            :
-            <View style={styles.treinoContainer}>
-              <Text style={styles.treinoTitle}>carregando: {`${carregando}`}</Text>
-            </View>
-        }
-        <TouchableOpacity
-          style={styles.icon}>
-          <Feather name='plus-circle' size={50} color={gold} />
-        </TouchableOpacity>
-      </View>
+      <ScrollView>
+        < FlatList
+          style={{ flex: 1 }}
+          data={treinos}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem} />
+      </ScrollView>
     )
   }
 }
@@ -104,11 +79,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  carregando: state.length === 0
+  treinos: getListTrainAndTypes(state)
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  setInitialDummyData: () => dispatch(receiveExecs(dummy))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default withNavigation(connect(mapStateToProps)(Treinos))

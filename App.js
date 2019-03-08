@@ -1,9 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
-import RootNavigator from './views/Navigator';
+import { Provider } from 'react-redux'
+import { View, StatusBar } from 'react-native';
 
-const TRStatusBar = (props) => {
+import configureStore from './redux/store'
+
+import RootNavigator from './views/Navigator';
+import { purple } from './colors'
+
+
+const store = configureStore()
+
+const TreinaoStatusBar = (props) => {
   const { backgroundColor } = props
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -15,18 +23,12 @@ const TRStatusBar = (props) => {
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TRStatusBar backgroundColor={'purple'} />
-        <RootNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <TreinaoStatusBar backgroundColor={purple} />
+          <RootNavigator />
+        </View>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
