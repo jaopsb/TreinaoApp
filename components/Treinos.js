@@ -68,13 +68,16 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   treinoTitle: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: 'bold',
     color: green
   },
+  typeContainer: {
+    flexDirection: 'row'
+  },
   typeText: {
     color: white,
-    fontSize: 15
+    fontSize: 25
   }
 })
 

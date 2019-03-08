@@ -92,15 +92,6 @@ const styles = StyleSheet.create({
     borderColor: deepPurple,
     borderWidth: 3,
     borderRadius: 10
-  },
-  treinoTitle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: green
-  },
-  typeText: {
-    color: white,
-    fontSize: 15
   }
 })
 

@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { TouchableOpacity, View, Alert, TextInput, Text, StyleSheet } from 'react-native'
+import { Header } from 'react-navigation'
+import { KeyboardAvoidingView, TouchableOpacity, View, Alert, TextInput, Text, StyleSheet } from 'react-native'
 import { validaExec, execNameKeys } from '../helpers';
 import { deepPurple, gold, white, green } from '../colors';
+import { editExec } from '../redux/actions';
 
 class EditTrenio extends React.Component {
 
@@ -12,6 +14,7 @@ class EditTrenio extends React.Component {
       charge: '',
       rep: '',
       serie: '',
+      description: ''
     }
   }
 
@@ -50,9 +53,17 @@ class EditTrenio extends React.Component {
     }
   }))
 
+  onChangeDescription = (text) => this.setState(prevState => ({
+    exercicio: {
+      ...prevState.exercicio,
+      description: text
+    }
+  }))
+
   //verifica se as condicoes estao satisfeitas, e edita o exercicio
   onSubmit = () => {
     const { exercicio } = this.state
+    const { editExec, navigation } = this.props
     let arrayValida = validaExec(exercicio)
 
     if (arrayValida.length > 0) {
@@ -69,13 +80,19 @@ class EditTrenio extends React.Component {
           { text: 'OK', style: 'cancel' }
         ]
       )
+    } else {
+      editExec(exercicio)
+        .then(() => navigation.navigate("TerinoInfo", { treino: exercicio.train }))
     }
   }
 
   render() {
     const { exercicio } = this.state
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior='padding'
+        keyboardVerticalOffset={Header.HEIGHT + 10}
+        style={styles.container}>
         <View style={styles.wrapper}>
           <View style={styles.inputWrapper}>
             <Text style={styles.label}>Exercicio</Text>
@@ -109,16 +126,23 @@ class EditTrenio extends React.Component {
               placeholder="Series"
               onChangeText={this.onChangeSerie} />
           </View>
+          <View
+            style={styles.inputWrapper}>
+            <Text style={styles.label}>Descrição</Text>
+            <TextInput
+              style={styles.input}
+              value={exercicio.description}
+              placeholder="Descrição"
+              onChangeText={this.onChangeDescription} />
+          </View>
         </View>
-
         <View style={{ justifyContent: 'center' }}>
           <TouchableOpacity
             onPress={this.onSubmit}>
             <Text style={styles.submitButton}>Editar</Text>
           </TouchableOpacity>
         </View>
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -129,10 +153,12 @@ const styles = StyleSheet.create({
     backgroundColor: deepPurple
   },
   wrapper: {
+    flex: 1,
     margin: 3,
     marginTop: 10
   },
   inputWrapper: {
+    flex: 1,
     flexDirection: 'column'
   },
   label: {
@@ -142,7 +168,7 @@ const styles = StyleSheet.create({
     top: 0,
   },
   input: {
-    fontSize: 30,
+    fontSize: 25,
     borderColor: gold,
     borderLeftWidth: 1,
     borderBottomWidth: 1,
@@ -164,4 +190,8 @@ const mapStateToProps = (state, { navigation }) => ({
   exercicio: state.find(exec => exec._id === navigation.state.params.id)
 })
 
-export default connect(mapStateToProps)(EditTrenio)
+const mapDispatchToProps = (dispatch) => ({
+  editExec: (exec) => dispatch(editExec(exec))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditTrenio)
