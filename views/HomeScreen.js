@@ -61,7 +61,8 @@ class HomeScreen extends React.Component {
             </View>
         }
         <TouchableOpacity
-          style={styles.icon}>
+          style={styles.icon}
+          onPress={() => this.props.navigation.navigate('New')}>
           <Feather name='plus-circle' size={50} color={gold} />
         </TouchableOpacity>
       </View>

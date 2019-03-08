@@ -1,25 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Modal from 'react-native-modalbox'
-import { deepPurple, gold, purple, white } from '../colors';
-import { filterExecsByTrain } from '../helpers';
-import { ScrollView } from 'react-native-gesture-handler';
-
-const treinoDummy = {
-  description: "subir a barra com os cotovelos acima dos ombros",
-  deleted: false,
-  _id: "5c60da6684fcf71e406b1beb",
-  owner: "5c33efe8a19c8344acb1f4b3",
-  charge: "25",
-  name: "Remada Alta",
-  rep: "12",
-  serie: 3,
-  type: "Ombros",
-  train: "A",
-  createdAt: "2019-02-11T02:13:58.578Z",
-  updatedAt: "2019-02-15T01:42:07.499Z"
-}
+import { deepPurple, gold, purple, white, blue } from '../colors';
+import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { filterExecsByTrain } from '../helpers'
+import { Feather } from '@expo/vector-icons'
 
 class TreinoInfo extends React.Component {
   state = {
@@ -52,7 +37,7 @@ class TreinoInfo extends React.Component {
     const { _id, rep, serie, type, name, charge, description } = item
 
     return (
-      <View key={_id}>
+      <View key={_id} style={{ flex: 1 }}>
         <TouchableOpacity
           onPress={() => this.openModal(description)}>
           <View style={styles.cardContainer}>
@@ -63,7 +48,12 @@ class TreinoInfo extends React.Component {
               <Text style={styles.cardText}>Series: {serie}</Text>
             </View>
             <View style={styles.cardRow}>
-              <Text style={[styles.cardText, { justifyContent: 'flex-end' }]}>Grupo Muscular: {type}</Text>
+              <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
+              <TouchableOpacity
+                style={styles.editIcon}
+                onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
+                <Feather name='edit' size={30} color={blue} />
+              </TouchableOpacity>
             </View>
           </View>
         </TouchableOpacity>
@@ -169,6 +159,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: white
   },
+  editIcon: {
+    position: 'absolute',
+    right: 0,
+    bottom: 3
+  },
   descriptionContainer: {
     margin: 10,
     padding: 5,
@@ -189,10 +184,10 @@ export default connect(mapStateToProps)(TreinoInfo)
 
 /*
 Guardado para depois -> criar modal
- {
-  toggleDescription && idDescription === _id &&
-  <View style={styles.descriptionContainer}>
-    <Text style={styles.descriptionText}>{description}</Text>
-  </View>
+{
+    toggleDescription && idDescription === _id &&
+    <View style={styles.descriptionContainer}>
+      <Text style={styles.descriptionText}>{description}</Text>
+    </View>
   }
-*/
+  */

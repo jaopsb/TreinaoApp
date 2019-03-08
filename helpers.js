@@ -7,6 +7,14 @@ export const TYPE = 'TYPE'
 export const TRAIN = 'TRAIN'
 export const DESC = 'DESC'
 
+export const execNameKeys = {
+  "rep": 'Repetições',
+  "charge": 'Carga',
+  "description": "Descrição",
+  "name": "Nome do Exercicio",
+  "serie": "Serie"
+}
+
 /* log mais facil de achar no terminal*/
 export const logInfo = (title, info) => {
   console.group(title)
