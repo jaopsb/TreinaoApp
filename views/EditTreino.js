@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { KeyboardAvoidingView, TouchableOpacity, View, Alert, TextInput, Text, StyleSheet } from 'react-native'
-import { validaExec, execNameKeys } from '../helpers';
-import { deepPurple, gold, white, green } from '../colors';
-import { editExec } from '../redux/actions';
+import { KeyboardAvoidingView, TouchableOpacity, Alert, TextInput, Text, StyleSheet } from 'react-native'
+import { validaExec, execNameKeys } from '../helpers'
+import { deepPurple, gold, white, green } from '../colors'
+import { editExec, handleEditExec } from '../redux/actions'
 
 class EditTrenio extends React.Component {
 
@@ -62,7 +62,7 @@ class EditTrenio extends React.Component {
   //verifica se as condicoes estao satisfeitas, e edita o exercicio
   onSubmit = () => {
     const { exercicio } = this.state
-    const { editExec, navigation } = this.props
+    const { dispatch, navigation } = this.props
     let arrayValida = validaExec(exercicio)
 
     if (arrayValida.length > 0) {
@@ -80,8 +80,9 @@ class EditTrenio extends React.Component {
         ]
       )
     } else {
-      editExec(exercicio)
-        .then(() => navigation.navigate("TerinoInfo", { treino: exercicio.train }))
+      dispatch(editExec(exercicio))
+
+      navigation.navigate("TreinoInfo", { treino: exercicio.train })
     }
   }
 
@@ -114,9 +115,12 @@ class EditTrenio extends React.Component {
 
         <TextInput
           style={styles.input}
+          multiline={true}
+          autoCapitalize='sentences'
           value={exercicio.description}
           placeholder="Descrição"
           onChangeText={this.onChangeDescription} />
+
         <TouchableOpacity
           onPress={this.onSubmit}>
           <Text style={styles.submitButton}>Editar</Text>
@@ -129,6 +133,7 @@ class EditTrenio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 20,
     justifyContent: 'space-around',
     backgroundColor: deepPurple
   },
@@ -171,7 +176,7 @@ const mapStateToProps = (state, { navigation }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  editExec: (exec) => dispatch(editExec(exec))
+  editExec: (exec) => dispatch(handleEditExec(exec))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditTrenio)
+export default connect(mapStateToProps)(EditTrenio)

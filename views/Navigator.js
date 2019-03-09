@@ -1,6 +1,6 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from './HomeScreen'
-import { white, purple } from '../colors'
+import { white, purple, deepPurple } from '../colors'
 import TreinoInfo from './TreinoInfo'
 import NewTreino from './NewTreino';
 import EditTrenio from './EditTreino';
@@ -12,6 +12,8 @@ const RootNavigator = createStackNavigator(
       navigationOptions: {
         title: 'Treinao APP',
         headerTitleStyle: {
+          flex: 1,
+          fontSize: 40,
           textAlign: 'center'
         }
       },
@@ -38,7 +40,7 @@ const RootNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: deepPurple,
       },
       headerTintColor: white,
       headerTitleStyle: {

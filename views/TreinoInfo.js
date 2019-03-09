@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
-import { deepPurple, gold, purple, white, blue } from '../colors';
+import { deepPurple, gold, purple, white, blue, green } from '../colors';
 import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain } from '../helpers'
 import { Feather } from '@expo/vector-icons'
@@ -52,7 +52,7 @@ class TreinoInfo extends React.Component {
               <TouchableOpacity
                 style={styles.editIcon}
                 onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-                <Feather name='edit' size={30} color={blue} />
+                <Feather name='edit' size={30} color={green} />
               </TouchableOpacity>
             </View>
           </View>
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: deepPurple,
   },
   btn: {
+    bottom: 3,
     margin: 10,
     justifyContent: 'flex-end'
   },
@@ -110,8 +111,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: deepPurple,
     alignItems: 'center',
-    height: 250,
-    width: 350
+    height: 360,
+    width: '100%'
   },
   modalTitle: {
     color: gold,
@@ -119,21 +120,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   modalText: {
-    justifyContent: 'center',
-    padding: 10,
+    margin: 10,
     fontSize: 25,
     color: white,
   },
   badge: {
     top: 1,
     margin: 3,
+    marginBottom: 5,
     width: '100%',
     padding: 3,
-    borderRadius: 5,
-    backgroundColor: purple,
+    borderColor: gold,
+    borderBottomWidth: 2
   },
   badgeTitle: {
     color: gold,
+    fontWeight: 'bold',
     fontSize: 40,
     alignSelf: 'center',
   },
