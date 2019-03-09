@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Header } from 'react-navigation'
 import { KeyboardAvoidingView, TouchableOpacity, View, Alert, TextInput, Text, StyleSheet } from 'react-native'
 import { validaExec, execNameKeys } from '../helpers';
 import { deepPurple, gold, white, green } from '../colors';
@@ -91,57 +90,37 @@ class EditTrenio extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior='padding'
-        keyboardVerticalOffset={Header.HEIGHT + 10}
         style={styles.container}>
-        <View style={styles.wrapper}>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Exercicio</Text>
-            <TextInput
-              style={styles.input}
-              value={exercicio.name}
-              placeholder="Nome do Exercicio"
-              onChangeText={this.onChangeName} />
-          </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Repetições</Text>
-            <TextInput
-              style={styles.input}
-              value={exercicio.rep}
-              placeholder="Repetições"
-              onChangeText={this.onChangeRep} />
-          </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Carga</Text>
-            <TextInput
-              style={styles.input}
-              value={exercicio.charge}
-              placeholder="Carga"
-              onChangeText={this.onChangeCharge} />
-          </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Series</Text>
-            <TextInput
-              style={styles.input}
-              value={`${exercicio.serie}`}
-              placeholder="Series"
-              onChangeText={this.onChangeSerie} />
-          </View>
-          <View
-            style={styles.inputWrapper}>
-            <Text style={styles.label}>Descrição</Text>
-            <TextInput
-              style={styles.input}
-              value={exercicio.description}
-              placeholder="Descrição"
-              onChangeText={this.onChangeDescription} />
-          </View>
-        </View>
-        <View style={{ justifyContent: 'center' }}>
-          <TouchableOpacity
-            onPress={this.onSubmit}>
-            <Text style={styles.submitButton}>Editar</Text>
-          </TouchableOpacity>
-        </View>
+        <TextInput
+          style={styles.input}
+          value={exercicio.name}
+          placeholder="Nome do Exercicio"
+          onChangeText={this.onChangeName} />
+        <TextInput
+          style={styles.input}
+          value={exercicio.rep}
+          placeholder="Repetições"
+          onChangeText={this.onChangeRep} />
+        <TextInput
+          style={styles.input}
+          value={exercicio.charge}
+          placeholder="Carga"
+          onChangeText={this.onChangeCharge} />
+        <TextInput
+          style={styles.input}
+          value={`${exercicio.serie}`}
+          placeholder="Series"
+          onChangeText={this.onChangeSerie} />
+
+        <TextInput
+          style={styles.input}
+          value={exercicio.description}
+          placeholder="Descrição"
+          onChangeText={this.onChangeDescription} />
+        <TouchableOpacity
+          onPress={this.onSubmit}>
+          <Text style={styles.submitButton}>Editar</Text>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     )
   }
@@ -150,6 +129,7 @@ class EditTrenio extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-around',
     backgroundColor: deepPurple
   },
   wrapper: {

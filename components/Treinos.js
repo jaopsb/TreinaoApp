@@ -45,16 +45,6 @@ class Treinos extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: deepPurple,
-    flexDirection: 'column'
-  },
-  icon: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
-  },
   treinoContainer: {
     marginLeft: 15,
     marginRight: 15,

@@ -23,30 +23,6 @@ class HomeScreen extends React.Component {
     this.setState({ carregando })
   }
 
-  //Transformar em Component Treinos
-  keyExtractor = (item, index) => `${index}`
-
-  renderItem = ({ item }) => {
-    const { navigation } = this.props
-    return (
-      Object.keys(item).map(key => (
-        <TouchableOpacity key={`${key}`}
-          onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
-          <View style={styles.treinoContainer}>
-            <Text style={styles.treinoTitle}>{key}</Text>
-            {
-              item[key].map(type => (
-                <Text key={type + key}
-                  style={styles.typeText}>{type}</Text>
-              ))
-            }
-          </View >
-        </TouchableOpacity>
-      ))
-    )
-  }
-  //Transformar em Component Treinos
-
   render() {
     const { carregando } = this.state
 
