@@ -2,10 +2,10 @@ import React from 'react'
 import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
-import { KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
+import { Alert, KeyboardAvoidingView, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { handleAddExecs } from '../redux/actions';
 import { gold, deepPurple, green, white } from '../colors'
-import { getTrains, getTypes } from '../helpers';
+import { getTrains, getTypes, validaExec } from '../helpers';
 
 class NewTreino extends React.Component {
   state = {
@@ -75,6 +75,40 @@ class NewTreino extends React.Component {
     }))
   }
 
+  handleSubmit = () => {
+    const { exercicio } = this.state
+
+    const valArray = validaExec(exercicio)
+
+    if (valArray.length > 0) {
+      Alert.alert(
+        'Erro!',
+        valArray.length === 0 ?
+          `O campo ${valArray} esta vazio` :
+          `Os campos ${valArray} estão vazios`,
+        [
+          { text: 'OK', style: 'cancel' }
+        ]
+      )
+    } else {
+      Alert.alert(
+        'Confirmar Treino',
+        'Confirmar criação de Treino?',
+        [
+          {
+            text: 'Sim', onPress: () => {
+              this.props.addTreino(exercicio)
+                .then(() => { this.props.navigation.navigate('Home') })
+            }
+          },
+          {
+            text: 'Não', style: 'cancel'
+          }
+        ]
+      )
+    }
+  }
+
   render() {
     const { treinos, gruposMusc } = this.props
     const { exercicio } = this.state
@@ -129,9 +163,8 @@ class NewTreino extends React.Component {
           }
         </Picker>
 
-
         <TouchableOpacity
-          onPress={() => { }}>
+          onPress={this.handleSubmit}>
           <Text style={styles.submitButton}>Criar Exercicio</Text>
         </TouchableOpacity>
 
