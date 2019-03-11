@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
+import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import dummy from '../Dummy.json'
 
@@ -28,6 +28,12 @@ class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/Logo.png')}
+          />
+        </View>
         {
           !carregando ?
             <Treinos />
@@ -36,10 +42,13 @@ class HomeScreen extends React.Component {
               <Text style={styles.treinoTitle}>carregando: {`${carregando}`}</Text>
             </View>
         }
+
         <TouchableOpacity
-          style={styles.icon}
           onPress={() => this.props.navigation.navigate('New')}>
-          <Feather name='plus-circle' size={50} color={gold} />
+          <Text
+            style={styles.newTreinoBtn}>
+            Criar Treino
+           </Text>
         </TouchableOpacity>
       </View>
     )
@@ -56,6 +65,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     right: 10,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    margin: 5
+  },
+  logo: {
+    width: 100,
+    height: 100
+  },
+  newTreinoBtn: {
+    textAlign: 'center',
+    color: white,
+    fontSize: 35,
+    borderColor: gold,
+    borderWidth: 1
   },
   treinoContainer: {
     marginLeft: 15,

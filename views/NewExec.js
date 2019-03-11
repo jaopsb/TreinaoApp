@@ -3,11 +3,11 @@ import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, KeyboardAvoidingView, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
-import { handleAddExecs } from '../redux/actions';
+import { handleAddExecs, addExec } from '../redux/actions';
 import { gold, deepPurple, green, white } from '../colors'
-import { getTrains, getTypes, validaExec } from '../helpers';
+import { getTrains, getTypes, validaExec, execNameKeys } from '../helpers';
 
-class NewTreino extends React.Component {
+class NewExec extends React.Component {
   state = {
     exercicio: {
       name: '',
@@ -19,6 +19,17 @@ class NewTreino extends React.Component {
       _id: '',
       owner: ''
     }
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props
+
+    this.setState(prevState => ({
+      exercicio: {
+        ...prevState.exercicio,
+        train: navigation.state.params.treino
+      }
+    }))
   }
 
   handleChangeName = (text) => {
@@ -66,6 +77,16 @@ class NewTreino extends React.Component {
     }))
   }
 
+
+  handleChangeSerie = (text) => {
+    this.setState(prevState => ({
+      exercicio: {
+        ...prevState.exercicio,
+        serie: Number(text)
+      }
+    }))
+  }
+
   handleChangeDescription = (text) => {
     this.setState(prevState => ({
       exercicio: {
@@ -78,19 +99,22 @@ class NewTreino extends React.Component {
   handleSubmit = () => {
     const { exercicio } = this.state
 
-    const valArray = validaExec(exercicio)
+    let arrayValida = validaExec(exercicio)
 
-    if (valArray.length > 0) {
+    if (arrayValida.length > 2) {
+
+      arrayValida = arrayValida.map(key => execNameKeys[key])
       Alert.alert(
         'Erro!',
-        valArray.length === 0 ?
-          `O campo ${valArray} esta vazio` :
-          `Os campos ${valArray} estão vazios`,
+        arrayValida.length === 0 ?
+          `O campo ${arrayValida} esta vazio` :
+          `Os campos ${arrayValida} estão vazios`,
         [
           { text: 'OK', style: 'cancel' }
         ]
       )
     } else {
+      exercicio._id = uuid()
       Alert.alert(
         'Confirmar Treino',
         'Confirmar criação de Treino?',
@@ -98,7 +122,7 @@ class NewTreino extends React.Component {
           {
             text: 'Sim', onPress: () => {
               this.props.addTreino(exercicio)
-                .then(() => { this.props.navigation.navigate('Home') })
+              this.props.navigation.navigate('TreinoInfo', { treino: exercicio.train })
             }
           },
           {
@@ -131,7 +155,13 @@ class NewTreino extends React.Component {
           style={styles.input}
           placeholder='Carga'
           value={exercicio.charge}
-          onChangeText={this.handleChangeName} />
+          onChangeText={this.handleChangeCharge} />
+        <TextInput
+          style={styles.input}
+          placeholder='Serie'
+          keyboardType='number-pad'
+          value={`${exercicio.serie}`}
+          onChangeText={this.handleChangeSerie} />
         <TextInput
           style={styles.input}
           placeholder='Descrição'
@@ -154,8 +184,10 @@ class NewTreino extends React.Component {
 
         <Text style={styles.label}>Grupo Muscular</Text>
         <Picker
-          selectedValue={exercicio.type}
+          selectedValue={exercicio.type === '' ? '0' : exercicio.type}
           onValueChange={this.handlePickType}>
+          <Picker.Item key={'00'} label={'Escolha um Grupo'} value={'0'} />
+
           {
             gruposMusc.map(gr => (
               <Picker.Item key={gr} label={gr} value={gr} />
@@ -167,10 +199,6 @@ class NewTreino extends React.Component {
           onPress={this.handleSubmit}>
           <Text style={styles.submitButton}>Criar Exercicio</Text>
         </TouchableOpacity>
-
-        {
-          //fazer lista de exercicios ja feitos
-        }
 
       </KeyboardAvoidingView>
     )
@@ -229,7 +257,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addTreino: (treino) => dispatch(handleAddExecs(treino))
+  addTreino: (treino) => dispatch(addExec(treino))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTreino)
+export default connect(mapStateToProps, mapDispatchToProps)(NewExec)

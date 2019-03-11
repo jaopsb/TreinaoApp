@@ -88,6 +88,14 @@ class TreinoInfo extends React.Component {
             renderItem={this.renderItem}
           />
         </ScrollView>
+
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('NewExec', { treino })}>
+          <Text
+            style={styles.newTreinoBtn}>
+            Novo Exercicio
+           </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -175,7 +183,14 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 20,
     color: white
-  }
+  },
+  newTreinoBtn: {
+    textAlign: 'center',
+    color: white,
+    fontSize: 35,
+    borderColor: gold,
+    borderWidth: 1
+  },
 })
 
 const mapStateToProps = (state, { navigation }) => ({

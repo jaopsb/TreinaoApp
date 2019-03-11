@@ -35,8 +35,9 @@ export const validaUser = (user) => {
 }
 
 /* valida se todos os campos obrigatorios do exercicio estao preenchidos */
+//TODO:  RETIRAR VALIDACAO DE _ID E DE OWNER,TEM QUE ESTAR PREENCHIDAS
 export const validaExec = (exec) => {
-  return Object.keys(exec).filter(key => key !== 'description' && exec[key] === '')
+  return Object.keys(exec).filter(key => key !== '_id' && key != 'owner' && key !== 'description' && exec[key] === '')
 }
 
 /*GetTrains - busca todos os treinos (train) ques estao na lista */

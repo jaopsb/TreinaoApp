@@ -88,6 +88,7 @@ class EditTrenio extends React.Component {
 
   render() {
     const { exercicio } = this.state
+    console.log(exercicio)
     return (
       <KeyboardAvoidingView
         behavior='padding'
