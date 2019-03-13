@@ -7,7 +7,7 @@ export default (state = [], action) => {
     case ADD_EXEC:
       return [
         ...state,
-        ...action.exec
+        action.exec
       ]
     case EDIT_EXEC:
       return [

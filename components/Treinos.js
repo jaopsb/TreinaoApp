@@ -34,11 +34,16 @@ class Treinos extends React.Component {
     const { treinos } = this.props
     return (
       <ScrollView>
-        < FlatList
-          style={{ flex: 1 }}
-          data={treinos}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem} />
+        {
+          treinos.length > 0 ?
+            < FlatList
+              style={{ flex: 1 }}
+              data={treinos}
+              keyExtractor={this.keyExtractor}
+              renderItem={this.renderItem} />
+            :
+            <Text style={styles.treinoTitle}>Não há treinos!</Text>
+        }
       </ScrollView>
     )
   }
