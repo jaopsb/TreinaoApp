@@ -3,15 +3,8 @@ import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, KeyboardAvoidingView, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
-<<<<<<< HEAD:views/NewTreino.js
-import { handleAddExecs } from '../redux/actions';
-import { gold, deepPurple, green, white, backGround, detail, darkGrayBrown } from '../colors'
+import { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, getTypes, validaExec } from '../helpers';
-=======
-import { handleAddExecs, addExec } from '../redux/actions';
-import { gold, deepPurple, green, white } from '../colors'
-import { getTrains, getTypes, validaExec, execNameKeys } from '../helpers';
->>>>>>> 3e79d3c916b365fc4914b93a2d7b6c44f6f56dec:views/NewExec.js
 
 class NewExec extends React.Component {
   state = {
