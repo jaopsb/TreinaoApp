@@ -10,17 +10,13 @@ const RootNavigator = createStackNavigator(
     Home: {
       screen: HomeScreen,
       navigationOptions: {
-        title: 'Treinao APP',
-        headerTitleStyle: {
-          flex: 1,
-          fontSize: 40,
-          textAlign: 'center'
-        }
+        header: null
       },
     },
     TreinoInfo: {
       screen: TreinoInfo,
       navigationOptions: {
+        header: null,
         title: 'Treino Info',
       }
     },

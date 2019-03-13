@@ -11,10 +11,11 @@ class Treinos extends React.Component {
   keyExtractor = (item, index) => `${index}`
 
   renderItem = ({ item }) => {
-    const { navigation } = this.props
+    const { navigation, showSneakPeek } = this.props
     return (
       Object.keys(item).map(key => (
         <TouchableOpacity key={`${key}`}
+          onLongPress={() => showSneakPeek(key)}
           onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
           <View style={styles.treinoContainer}>
             <Text style={styles.treinoTitle}>{key}</Text>

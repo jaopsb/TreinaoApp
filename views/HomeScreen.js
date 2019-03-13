@@ -1,17 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Modal from 'react-native-modalbox'
 import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import dummy from '../Dummy.json'
 
 import Treinos from '../components/Treinos'
 import { receiveExecs } from '../redux/actions';
-import { gold, blue, backGround, lightGreen, goldBrown } from '../colors'
+import { white, gold, blue, backGround, goldBrown, detail, darkGrayBrown, darkBackGround } from '../colors'
+import { getTitles } from '../helpers.js';
 
 
 class HomeScreen extends React.Component {
   state = {
-    carregando: true
+    description: '',
+    toggleDescription: false,
+    carregando: true,
+    isDisabled: false,
+    titles: []
   }
 
   componentDidMount() {
@@ -23,8 +29,20 @@ class HomeScreen extends React.Component {
     this.setState({ carregando })
   }
 
+  sneakPeek = (treino) => {
+    const { treinos } = this.props
+
+    this.setState({
+      titles: getTitles(treinos, treino),
+      isDisabled: false
+    })
+    this.refs.modal3.open()
+  }
+
+  closeModal = () => this.refs.modal3.close()
+
   render() {
-    const { carregando } = this.state
+    const { carregando, titles } = this.state
 
     return (
       <View style={styles.container}>
@@ -33,10 +51,24 @@ class HomeScreen extends React.Component {
             style={styles.logo}
             source={require('../assets/Logo.png')}
           />
+          <Text style={styles.logoTitle}>Treinao App</Text>
         </View>
+
+        <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
+          <Text style={styles.modalTitle}>Exercicios</Text>
+          {
+            titles.length > 0 ?
+              titles.map(title => <Text key={title} style={styles.modalText}>{title}</Text>) : null
+          }
+          <TouchableOpacity
+            onPress={this.closeModal}
+            style={styles.btn}>
+            <Text style={styles.btnText}>Close</Text>
+          </TouchableOpacity>
+        </Modal>
         {
           !carregando ?
-            <Treinos />
+            <Treinos showSneakPeek={this.sneakPeek} />
             :
             <View style={styles.treinoContainer}>
               <Text style={styles.treinoTitle}>carregando: {`${carregando}`}</Text>
@@ -44,7 +76,8 @@ class HomeScreen extends React.Component {
         }
 
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('New')}>
+          style={styles.icon}
+          onPress={() => this.props.navigation.navigate('NewTreino', { treino: '' })}>
           <Feather name='plus-circle' size={50} color={goldBrown} />
         </TouchableOpacity>
       </View>
@@ -71,12 +104,43 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100
   },
+  logoTitle: {
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
   newTreinoBtn: {
     textAlign: 'center',
     color: white,
     fontSize: 35,
     borderColor: gold,
     borderWidth: 1
+  },
+  modal: {
+    flexDirection: 'column',
+    backgroundColor: darkBackGround,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 500,
+    width: '80%'
+  },
+  modalTitle: {
+    color: detail,
+    fontSize: 40,
+    justifyContent: 'center',
+  },
+  modalText: {
+    margin: 5,
+    fontSize: 20,
+    color: white,
+  },
+  btn: {
+    bottom: 3,
+    margin: 10,
+  },
+  btnText: {
+    fontSize: 25,
+    color: 'red',
   },
   treinoContainer: {
     marginLeft: 15,
@@ -93,7 +157,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  carregando: state.length === 0
+  carregando: state.length === 0,
+  treinos: state
 })
 
 const mapDispatchToProps = (dispatch) => ({

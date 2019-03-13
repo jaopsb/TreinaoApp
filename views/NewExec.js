@@ -22,11 +22,12 @@ class NewExec extends React.Component {
 
   componentDidMount() {
     const { navigation } = this.props
+    const train = navigation.state.params.treino
 
     this.setState(prevState => ({
       exercicio: {
         ...prevState.exercicio,
-        train: navigation.state.params.treino
+        train: train
       }
     }))
   }

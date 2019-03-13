@@ -4,7 +4,7 @@ import Modal from 'react-native-modalbox'
 import { white, detail, green, backGround, icon, title, darkGrayBrown, } from '../colors';
 import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain } from '../helpers'
-import { Feather } from '@expo/vector-icons'
+import { Feather, Ionicons } from '@expo/vector-icons'
 
 class TreinoInfo extends React.Component {
   state = {
@@ -67,6 +67,11 @@ class TreinoInfo extends React.Component {
     const { navigation } = this.props
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.backBtn}
+          onPress={() => navigation.navigate('Home')}>
+          <Ionicons name='md-arrow-round-back' color={white} size={40} />
+        </TouchableOpacity>
         <View style={styles.badge}>
           <Text style={styles.badgeTitle}>{treino}</Text>
         </View>
@@ -90,7 +95,7 @@ class TreinoInfo extends React.Component {
         </ScrollView>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('New')}        >
+          onPress={() => navigation.navigate('NewExec', { treino })}        >
           <Text style={styles.submitButton}>Novo Exercicio</Text>
         </TouchableOpacity>
 
@@ -103,6 +108,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: backGround,
+  },
+  backBtn: {
+    position: 'absolute',
+    top: 10,
+    left: 10
   },
   btn: {
     bottom: 3,
@@ -139,7 +149,7 @@ const styles = StyleSheet.create({
   badgeTitle: {
     color: title,
     fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 50,
     alignSelf: 'center',
   },
   cardContainer: {

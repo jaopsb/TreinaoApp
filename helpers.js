@@ -52,6 +52,15 @@ export const getTypes = (treino) => {
   return aux.filter((item, index) => aux.indexOf(item) >= index)
 }
 
+/*GetTitles - busca o nome de todos os exercicios de um treino especifico */
+export const getTitles = (treino, train) => {
+  return treino.map(exec =>
+    exec.train === train ?
+      exec.name :
+      null
+  ).filter(exec => exec !== null)
+}
+
 /* filterExecsByTrain - filtra os exercicios pelo nome do treino*/
 export const filterExecsByTrain = (exercicios, train) => {
   return exercicios.filter(exec => exec.train === train)

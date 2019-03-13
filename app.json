@@ -4,17 +4,18 @@
     "slug": "TreinaoApp",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "primaryColor": "#bd9875",
     "platforms": [
       "ios",
       "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Logo.png",
     "splash": {
       "image": "./assets/Logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#d6bfa9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

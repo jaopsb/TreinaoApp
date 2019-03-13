@@ -21,6 +21,7 @@ export const lightGreen = '#a9d6a9' //'#bfff80'
 
 
 export const backGround = grayBrown
+export const darkBackGround = darkGrayBrown
 export const detail = 'black'
 export const icon = 'black'
 export const title = lightBrown
