@@ -6,7 +6,7 @@ import { View, StatusBar } from 'react-native';
 import configureStore from './redux/store'
 
 import RootNavigator from './views/Navigator';
-import { purple } from './colors'
+import { grayBrown } from './colors'
 
 
 const store = configureStore()
@@ -25,7 +25,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <TreinaoStatusBar backgroundColor={purple} />
+          <TreinaoStatusBar backgroundColor={grayBrown} />
           <RootNavigator />
         </View>
       </Provider>

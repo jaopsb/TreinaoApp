@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { KeyboardAvoidingView, TouchableOpacity, Alert, TextInput, Text, StyleSheet } from 'react-native'
 import { validaExec, execNameKeys } from '../helpers'
-import { deepPurple, gold, white, green } from '../colors'
+import { gold, styleText, green, backGround, detail, white, darkGrayBrown } from '../colors'
 import { editExec, handleEditExec } from '../redux/actions'
 
 class EditTrenio extends React.Component {
@@ -114,7 +114,7 @@ class EditTrenio extends React.Component {
           onChangeText={this.onChangeSerie} />
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { padding: 3 }]}
           multiline={true}
           autoCapitalize='sentences'
           value={exercicio.description}
@@ -134,8 +134,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    justifyContent: 'space-around',
-    backgroundColor: deepPurple
+    backgroundColor: backGround
   },
   wrapper: {
     flex: 1,
@@ -149,14 +148,15 @@ const styles = StyleSheet.create({
   label: {
     left: 5,
     fontSize: 15,
-    color: gold,
+    color: detail,
     top: 0,
   },
   input: {
     fontSize: 25,
-    borderColor: gold,
-    borderLeftWidth: 1,
-    borderBottomWidth: 1,
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 3,
+    borderRadius: 5,
     color: white,
     margin: 5,
     padding: 3
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
     margin: 30,
     textAlign: 'center',
     fontSize: 30,
-    color: white,
-    backgroundColor: green,
+    color: 'white',
+    backgroundColor: detail,
     borderRadius: 5
   }
 })

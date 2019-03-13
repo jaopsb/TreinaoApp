@@ -6,7 +6,7 @@ import dummy from '../Dummy.json'
 
 import Treinos from '../components/Treinos'
 import { receiveExecs } from '../redux/actions';
-import { gold, deepPurple, green, blue, purple, white } from '../colors'
+import { gold, blue, backGround, lightGreen, goldBrown } from '../colors'
 
 
 class HomeScreen extends React.Component {
@@ -39,7 +39,7 @@ class HomeScreen extends React.Component {
         <TouchableOpacity
           style={styles.icon}
           onPress={() => this.props.navigation.navigate('New')}>
-          <Feather name='plus-circle' size={50} color={gold} />
+          <Feather name='plus-circle' size={50} color={goldBrown} />
         </TouchableOpacity>
       </View>
     )
@@ -49,7 +49,7 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: deepPurple,
+    backgroundColor: backGround,
     flexDirection: 'column'
   },
   icon: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     backgroundColor: blue,
-    borderColor: deepPurple,
+    borderColor: backGround,
     borderWidth: 3,
     borderRadius: 10
   }

@@ -3,7 +3,7 @@ import dummy from '../Dummy.json'
 import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { ScrollView, FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { deepPurple, green, blue, white, gold } from '../colors'
+import { white, detail, title, darkGrayBrown } from '../colors'
 import { getListTrainAndTypes } from '../helpers';
 
 class Treinos extends React.Component {
@@ -50,20 +50,23 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginTop: 5,
     marginBottom: 5,
-    padding: 10,
-    borderColor: gold,
-    borderBottomWidth: 3,
+    padding: 5,
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 3,
+    borderRadius: 5
   },
   treinoTitle: {
     fontSize: 50,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: green
+    color: title
   },
   typeContainer: {
     flexDirection: 'row'
   },
   typeText: {
+    textAlign: 'center',
     color: white,
     fontSize: 35
   }

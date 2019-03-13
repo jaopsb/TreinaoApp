@@ -1,6 +1,6 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from './HomeScreen'
-import { white, purple, deepPurple } from '../colors'
+import { white, backGround } from '../colors'
 import TreinoInfo from './TreinoInfo'
 import NewTreino from './NewTreino';
 import EditTrenio from './EditTreino';
@@ -40,7 +40,7 @@ const RootNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: deepPurple,
+        backgroundColor: backGround,
       },
       headerTintColor: white,
       headerTitleStyle: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
-import { deepPurple, gold, purple, white, blue, green } from '../colors';
+import { white, detail, green, backGround, icon, title, darkGrayBrown, } from '../colors';
 import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain } from '../helpers'
 import { Feather } from '@expo/vector-icons'
@@ -52,7 +52,7 @@ class TreinoInfo extends React.Component {
               <TouchableOpacity
                 style={styles.editIcon}
                 onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-                <Feather name='edit' size={30} color={green} />
+                <Feather name='edit' size={30} color={icon} />
               </TouchableOpacity>
             </View>
           </View>
@@ -64,7 +64,7 @@ class TreinoInfo extends React.Component {
   render() {
     const { treino } = this.props.navigation.state.params
     const { treinos } = this.props
-
+    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.badge}>
@@ -88,6 +88,12 @@ class TreinoInfo extends React.Component {
             renderItem={this.renderItem}
           />
         </ScrollView>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('New')}        >
+          <Text style={styles.submitButton}>Novo Exercicio</Text>
+        </TouchableOpacity>
+
       </View>
     )
   }
@@ -96,7 +102,7 @@ class TreinoInfo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: deepPurple,
+    backgroundColor: backGround,
   },
   btn: {
     bottom: 3,
@@ -104,18 +110,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   btnText: {
-    fontSize: 15,
-    color: white,
+    fontSize: 25,
+    color: 'red',
   },
   modal: {
     justifyContent: 'center',
-    backgroundColor: deepPurple,
+    flexDirection: 'column',
+    backgroundColor: backGround,
     alignItems: 'center',
-    height: 360,
-    width: '100%'
+    height: 250,
+    width: 300
   },
   modalTitle: {
-    color: gold,
+    color: detail,
     fontSize: 40,
     justifyContent: 'center',
   },
@@ -126,15 +133,11 @@ const styles = StyleSheet.create({
   },
   badge: {
     top: 1,
-    margin: 3,
     marginBottom: 5,
     width: '100%',
-    padding: 3,
-    borderColor: gold,
-    borderBottomWidth: 2
   },
   badgeTitle: {
-    color: gold,
+    color: title,
     fontWeight: 'bold',
     fontSize: 40,
     alignSelf: 'center',
@@ -143,9 +146,10 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingTop: 5,
     paddingLeft: 5,
-    borderColor: gold,
-    borderBottomWidth: 1,
-    borderLeftWidth: 1
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 5,
+    borderRadius: 5
   },
   cardTitle: {
     fontSize: 30,
@@ -175,6 +179,14 @@ const styles = StyleSheet.create({
   descriptionText: {
     fontSize: 20,
     color: white
+  },
+  submitButton: {
+    margin: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    color: white,
+    backgroundColor: darkGrayBrown,
+    borderRadius: 5
   }
 })
 

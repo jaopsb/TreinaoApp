@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, KeyboardAvoidingView, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { handleAddExecs } from '../redux/actions';
-import { gold, deepPurple, green, white } from '../colors'
+import { gold, deepPurple, green, white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, getTypes, validaExec } from '../helpers';
 
 class NewTreino extends React.Component {
@@ -136,6 +136,7 @@ class NewTreino extends React.Component {
           style={styles.input}
           placeholder='Descrição'
           multiline={true}
+          numberOfLines={3}
           autoCapitalize='sentences'
           value={exercicio.description}
           onChangeText={this.handleChangeDescription} />
@@ -180,7 +181,7 @@ class NewTreino extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: deepPurple,
+    backgroundColor: backGround,
     flexDirection: 'column'
   },
   label: {
@@ -188,14 +189,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     left: 5,
     fontSize: 20,
-    color: gold,
+    color: 'black',
     top: 0,
   },
   input: {
     fontSize: 25,
-    borderColor: gold,
-    borderLeftWidth: 1,
-    borderBottomWidth: 1,
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 3,
+    borderRadius: 5,
     color: white,
     margin: 5,
     padding: 10
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     height: 25,
     width: '100%',
-    backgroundColor: deepPurple
+    backgroundColor: backGround
   },
   pickerItem: {
     fontSize: 15,
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     color: white,
-    backgroundColor: green,
+    backgroundColor: detail,
     borderRadius: 5
   }
 })
