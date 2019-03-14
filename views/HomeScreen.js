@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons'
 import dummy from '../Dummy.json'
 
 import Treinos from '../components/Treinos'
-import { receiveExecs } from '../redux/actions';
+import { receiveExecs, handleInitalData } from '../redux/actions';
 import { white, gold, blue, backGround, goldBrown, detail, darkGrayBrown, darkBackGround } from '../colors'
 import { getTitles } from '../helpers.js';
 
@@ -21,7 +21,7 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setInitialDummyData()
+    this.props.getInitialData()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,7 +43,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const { carregando, titles } = this.state
-
+    const { treinos } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -67,12 +67,10 @@ class HomeScreen extends React.Component {
           </TouchableOpacity>
         </Modal>
         {
-          !carregando ?
+          !carregando && typeof (treinos) !== 'Object' ?
             <Treinos showSneakPeek={this.sneakPeek} />
             :
-            <View style={styles.treinoContainer}>
-              <Text style={styles.treinoTitle}>carregando: {`${carregando}`}</Text>
-            </View>
+            <Text style={styles.noTreino}>Não há treinos!! Vai criar monstrooo</Text>
         }
 
         <TouchableOpacity
@@ -153,6 +151,12 @@ const styles = StyleSheet.create({
     borderColor: backGround,
     borderWidth: 3,
     borderRadius: 10
+  },
+  noTreino: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 40,
+    color: 'red'
   }
 })
 
@@ -162,7 +166,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setInitialDummyData: () => dispatch(receiveExecs(dummy))
+  getInitialData: () => dispatch(handleInitalData())
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

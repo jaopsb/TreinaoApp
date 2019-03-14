@@ -43,8 +43,15 @@ export const handleInitalDummyData = () => {
 
 export const handleAddExecs = (execs) => {
   return function (dispatch) {
-    return dispatch(addExecs(execs))
-      .then(() => execs)
+    return API.setExecs(execs)
+      .then(() => dispatch(addExecs(execs)))
+  }
+}
+
+export const handleAddExec = (exec) => {
+  return function (dispatch) {
+    return API.setExec(exec)
+      .then(() => dispatch(addExec(exec)))
   }
 }
 

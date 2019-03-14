@@ -7,6 +7,27 @@ export const TYPE = 'TYPE'
 export const TRAIN = 'TRAIN'
 export const DESC = 'DESC'
 
+export const gruposMusc = [
+  'Ombros',
+  'Biceps',
+  'Dorsais',
+  'Abdominais/Lombar',
+  'Peitorais',
+  'Membros Inferiores',
+  'Triceps'
+]
+
+export const emptyExercicio = {
+  name: '',
+  charge: '',
+  rep: '',
+  serie: 0,
+  type: '',
+  train: '',
+  _id: '',
+  owner: ''
+}
+
 export const execNameKeys = {
   "rep": 'Repetições',
   "charge": 'Carga',

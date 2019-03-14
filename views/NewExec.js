@@ -2,9 +2,12 @@ import React from 'react'
 import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
-import { Alert, KeyboardAvoidingView, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
+import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
-import { getTrains, getTypes, validaExec } from '../helpers';
+import { getTrains, getTypes, validaExec, emptyExercicio, gruposMusc } from '../helpers';
+import Exercicios from '../components/Exercicios';
+import { addExecs, handleAddExecs, handleAddExec } from '../redux/actions';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
   state = {
@@ -17,18 +20,23 @@ class NewExec extends React.Component {
       train: '',
       _id: '',
       owner: ''
-    }
+    },
+    emMassa: false,
+    veioDeNovoTreino: false,
+    exerciciosSalvos: []
   }
 
   componentDidMount() {
     const { navigation } = this.props
-    const train = navigation.state.params.treino
+    const { treino, emMassa, veioDeNovoTreino } = navigation.state.params
 
     this.setState(prevState => ({
       exercicio: {
         ...prevState.exercicio,
-        train: train
-      }
+        train: treino,
+      },
+      emMassa,
+      veioDeNovoTreino
     }))
   }
 
@@ -121,7 +129,8 @@ class NewExec extends React.Component {
         [
           {
             text: 'Sim', onPress: () => {
-              this.props.addTreino(exercicio)
+
+              this.props.addExercicio(exercicio)
               this.props.navigation.navigate('TreinoInfo', { treino: exercicio.train })
             }
           },
@@ -133,75 +142,175 @@ class NewExec extends React.Component {
     }
   }
 
-  render() {
-    const { treinos, gruposMusc } = this.props
+  handleSaveNext = () => {
     const { exercicio } = this.state
+
+    let arrayValida = validaExec(exercicio)
+
+    if (arrayValida.length > 2) {
+      arrayValida = arrayValida.map(key => execNameKeys[key])
+      Alert.alert(
+        'Erro!',
+        arrayValida.length === 0 ?
+          `O campo ${arrayValida} esta vazio` :
+          `Os campos ${arrayValida} estão vazios`,
+        [
+          { text: 'OK', style: 'cancel' }
+        ]
+      )
+    } else {
+      //hack
+      exercicio._id = uuid()
+
+      if (exercicio.description === '') exercicio.description = 'Sem descrição'
+
+      this.setState(prevState => (
+        {
+          exercicio: emptyExercicio,
+          exerciciosSalvos: [
+            ...prevState.exerciciosSalvos,
+            exercicio
+          ]
+        })
+      )
+    }
+  }
+
+  saveAll = () => {
+    const { exerciciosSalvos } = this.state
+    const { treino } = this.props.navigation.state.params
+
+    if (exerciciosSalvos.length === 0)
+      return Alert.alert(
+        'NAAAAO',
+        'Você tem que salvar pelo menos um exercicio!',
+        [{ text: 'OK', style: 'cancel' }]
+      )
+
+    Alert.alert(
+      'Salvar Treino',
+      'Deseja salvar esse treino?',
+      [
+        {
+          text: 'SIM',
+          onPress: () => {
+            this.props.addTreino(exerciciosSalvos)
+            this.props.navigation.navigate('TreinoInfo', { treino })
+          }
+        },
+        {
+          text: 'Não', style: 'cancel'
+        }
+      ]
+    )
+  }
+
+  handleEdit = (_id) => {
+    const { exerciciosSalvos } = this.state
+
+    this.setState({
+      exercicio: exerciciosSalvos.find(exec => exec._id === _id)
+    })
+  }
+
+  render() {
+    const { treinos } = this.props
+    const { exercicio, emMassa, veioDeNovoTreino } = this.state
     return (
-      <KeyboardAvoidingView
-        behavior='padding'
-        keyboardVerticalOffset={Header.HEIGHT + 10}
+      <ScrollView
         style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder='Exercicio'
-          value={exercicio.name}
-          onChangeText={this.handleChangeName} />
-        <TextInput
-          style={styles.input}
-          placeholder='Repetições'
-          value={exercicio.rep}
-          onChangeText={this.handleChangeRep} />
-        <TextInput
-          style={styles.input}
-          placeholder='Carga'
-          value={exercicio.charge}
-          onChangeText={this.handleChangeCharge} />
-        <TextInput
-          style={styles.input}
-          placeholder='Serie'
-          keyboardType='number-pad'
-          value={`${exercicio.serie}`}
-          onChangeText={this.handleChangeSerie} />
-        <TextInput
-          style={styles.input}
-          placeholder='Descrição'
-          multiline={true}
-          numberOfLines={3}
-          autoCapitalize='sentences'
-          value={exercicio.description}
-          onChangeText={this.handleChangeDescription} />
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={Header.HEIGHT + 10}>
+          <TextInput
+            style={styles.input}
+            placeholder='Exercicio'
+            value={exercicio.name}
+            onChangeText={this.handleChangeName} />
+          <TextInput
+            style={styles.input}
+            placeholder='Repetições'
+            value={exercicio.rep}
+            onChangeText={this.handleChangeRep} />
+          <TextInput
+            style={styles.input}
+            placeholder='Carga'
+            value={exercicio.charge}
+            onChangeText={this.handleChangeCharge} />
+          <TextInput
+            style={styles.input}
+            placeholder='Serie'
+            keyboardType='number-pad'
+            value={`${exercicio.serie}`}
+            onChangeText={this.handleChangeSerie} />
+          <TextInput
+            style={styles.input}
+            placeholder='Descrição'
+            multiline={true}
+            numberOfLines={3}
+            autoCapitalize='sentences'
+            value={exercicio.description}
+            onChangeText={this.handleChangeDescription} />
 
-        <Text style={styles.label}>Treino</Text>
-        <Picker
-          selectedValue={exercicio.train}
-          style={styles.picker}
-          onValueChange={this.handlePickTrain}>
+          <Text style={styles.label}>Treino</Text>
           {
-            treinos.map(tr => (
-              <Picker.Item key={tr} label={tr} value={tr} />
-            ))
+            !veioDeNovoTreino ?
+              <Picker
+                selectedValue={exercicio.train}
+                style={styles.picker}
+                onValueChange={this.handlePickTrain}>
+                {
+                  treinos.map(tr => (
+                    <Picker.Item key={tr} label={tr} value={tr} />
+                  ))
+                }
+              </Picker>
+              :
+              <Text style={[styles.input, { textAlign: 'center' }]}>{exercicio.train}</Text>
           }
-        </Picker>
-
-        <Text style={styles.label}>Grupo Muscular</Text>
-        <Picker
-          selectedValue={exercicio.type === '' ? '0' : exercicio.type}
-          onValueChange={this.handlePickType}>
-          <Picker.Item key={'00'} label={'Escolha um Grupo'} value={'0'} />
+          <Text style={styles.label}>Grupo Muscular</Text>
+          <Picker
+            selectedValue={exercicio.type === '' ? '0' : exercicio.type}
+            onValueChange={this.handlePickType}>
+            <Picker.Item key={'00'} label={'Escolha um Grupo'} value={'0'} />
+            {
+              gruposMusc.map(gr => (
+                <Picker.Item key={gr} label={gr} value={gr} />
+              ))
+            }
+          </Picker>
 
           {
-            gruposMusc.map(gr => (
-              <Picker.Item key={gr} label={gr} value={gr} />
-            ))
+            emMassa ?
+              <View>
+
+                <TouchableOpacity
+                  onPress={this.handleSaveNext}>
+                  <Text style={styles.buttonNewExec}>Salvar Exercicio e Criar mais </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this.saveAll}>
+                  <Text style={styles.buttonNewExec}>Salvar Exercicios</Text>
+                </TouchableOpacity>
+              </View>
+              :
+              <TouchableOpacity
+                onPress={this.handleSubmit}>
+                <Text style={styles.submitButton}>Criar Exercicio</Text>
+              </TouchableOpacity>
           }
-        </Picker>
+          {
+            emMassa ?
+              <Text>Lista de exercicios ja feitos</Text> &&
+              <Exercicios
+                exercicios={this.state.exerciciosSalvos}
+                handleEdit={this.handleEdit}
+              />
+              : null
+          }
 
-        <TouchableOpacity
-          onPress={this.handleSubmit}>
-          <Text style={styles.submitButton}>Criar Exercicio</Text>
-        </TouchableOpacity>
-
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ScrollView>
     )
   }
 }
@@ -249,17 +358,25 @@ const styles = StyleSheet.create({
     color: white,
     backgroundColor: detail,
     borderRadius: 5
+  },
+  buttonNewExec: {
+    margin: 5,
+    textAlign: 'center',
+    fontSize: 30,
+    color: white,
+    backgroundColor: detail,
+    borderRadius: 5
   }
 })
 
 
 const mapStateToProps = (state) => ({
-  treinos: getTrains(state),
-  gruposMusc: getTypes(state)
+  treinos: getTrains(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addTreino: (treino) => dispatch(addExec(treino))
+  addExercicio: (treino) => dispatch(handleAddExec(treino)),
+  addTreino: (treino) => dispatch(handleAddExecs(treino))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewExec)

@@ -2,8 +2,9 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from './HomeScreen'
 import { white, backGround } from '../colors'
 import TreinoInfo from './TreinoInfo'
-import NewExec from './NewExec';
-import EditTrenio from './EditTreino';
+import NewExec from './NewExec'
+import EditTrenio from './EditTreino'
+import NewTreino from './NewTreino'
 
 const RootNavigator = createStackNavigator(
   {
@@ -27,7 +28,7 @@ const RootNavigator = createStackNavigator(
       }
     },
     NewTreino: {
-      screen: NewExec,
+      screen: NewTreino,
       navigationOptions: {
         title: 'Novo Treino'
       }
