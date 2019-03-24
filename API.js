@@ -5,7 +5,7 @@ export const TREINO_KEY = 'TREINAO_APP'
 export default {
   getExecs: () => (
     AsyncStorage.getItem(TREINO_KEY)
-      .then(data => JSON.parse(data))
+      .then(data =>data? JSON.parse(data) : [])
   ),
   setExec: (exec) => (
     AsyncStorage.mergeItem(TREINO_KEY, JSON.stringify(exec))

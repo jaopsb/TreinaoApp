@@ -4,6 +4,7 @@ export const RECEIVE_EXECS = 'RECEIVE_EXECS'
 export const ADD_EXEC = 'ADD_EXEC'
 export const EDIT_EXEC = 'EDIT_EXEC'
 export const ADD_EXECS = 'ADD_EXECS'
+export const DEL_EXEC = 'DEL_EXEC'
 
 export const receiveExecs = (execs) => ({
   type: RECEIVE_EXECS,
@@ -23,6 +24,11 @@ export const addExecs = (execs) => ({
 export const editExec = (exec) => ({
   type: EDIT_EXEC,
   exec
+})
+
+export const delExec = (id) =>({
+  type:DEL_EXEC,
+  id
 })
 
 export const handleInitalData = () => {

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
-import { getTrains, getTypes, validaExec, emptyExercicio, gruposMusc } from '../helpers';
+import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys } from '../helpers';
 import Exercicios from '../components/Exercicios';
-import { addExecs, handleAddExecs, handleAddExec } from '../redux/actions';
+import { handleAddExecs, handleAddExec } from '../redux/actions';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
@@ -19,7 +19,8 @@ class NewExec extends React.Component {
       type: '',
       train: '',
       _id: '',
-      owner: ''
+      owner: '',
+      deleted: false
     },
     emMassa: false,
     veioDeNovoTreino: false,
@@ -215,6 +216,7 @@ class NewExec extends React.Component {
 
   render() {
     const { treinos } = this.props
+    const { treino } = this.props.navigation.state.params
     const { exercicio, emMassa, veioDeNovoTreino } = this.state
     return (
       <ScrollView
@@ -253,21 +255,9 @@ class NewExec extends React.Component {
             onChangeText={this.handleChangeDescription} />
 
           <Text style={styles.label}>Treino</Text>
-          {
-            !veioDeNovoTreino ?
-              <Picker
-                selectedValue={exercicio.train}
-                style={styles.picker}
-                onValueChange={this.handlePickTrain}>
-                {
-                  treinos.map(tr => (
-                    <Picker.Item key={tr} label={tr} value={tr} />
-                  ))
-                }
-              </Picker>
-              :
-              <Text style={[styles.input, { textAlign: 'center' }]}>{exercicio.train}</Text>
-          }
+
+          <Text style={[styles.input, { textAlign: 'center' }]}>{treino}</Text>
+
           <Text style={styles.label}>Grupo Muscular</Text>
           <Picker
             selectedValue={exercicio.type === '' ? '0' : exercicio.type}

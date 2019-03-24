@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   carregando: state.length === 0,
-  treinos: state
+  treinos: state.filter(exec => exec.deleted === false)
 })
 
 const mapDispatchToProps = (dispatch) => ({

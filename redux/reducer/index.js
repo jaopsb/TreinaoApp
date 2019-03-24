@@ -1,4 +1,4 @@
-import { RECEIVE_EXECS, ADD_EXEC, EDIT_EXEC, ADD_EXECS } from "../actions";
+import { RECEIVE_EXECS, ADD_EXEC, EDIT_EXEC, ADD_EXECS, DEL_EXEC } from "../actions";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -22,6 +22,10 @@ export default (state = [], action) => {
         ...state,
         ...action.execs
       ]
+    case DEL_EXEC:
+    return[
+      ...state.filter(exec => exec._id !== action.id)
+    ]
     default:
       return state
   }

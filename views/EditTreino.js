@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { KeyboardAvoidingView, TouchableOpacity, Alert, TextInput, Text, StyleSheet } from 'react-native'
 import { validaExec, execNameKeys } from '../helpers'
 import { gold, styleText, green, backGround, detail, white, darkGrayBrown } from '../colors'
-import { editExec, handleEditExec } from '../redux/actions'
+import { editExec, handleEditExec, delExec } from '../redux/actions'
 
 class EditTrenio extends React.Component {
 
@@ -86,9 +86,45 @@ class EditTrenio extends React.Component {
     }
   }
 
+
+  onDelete = () => {
+    const { exercicio } = this.state
+    const { dispatch, navigation, treinoLenght } = this.props
+
+    //definindo qual rota tomar, se nao tem mais nenhum exercicio no treino,vai para home, senao chama a tela de info
+    const url = treinoLenght > 1 ? "TreinoInfo" : "Home"
+
+    const msg = "Deseja deletar o exercício \"" + exercicio.name + "\"?\n " + (treinoLenght === 1 ?
+      'Lembrando que o treino só contém este exercicio, se o apagar você terá que criar um novo treino' : '')
+
+    Alert.alert(
+      "Apagar",
+      msg,
+      [
+        {
+          text: "Sim",
+          onPress: () => {
+            dispatch(delExec(exercicio._id))
+            navigation.navigate(
+              url,
+              //define parametro se existe mais exercicios no treino, chama a tela de info
+              treinoLenght > 1 ?
+                { treino: exercicio.train } :
+                null
+            )
+          }
+        },
+        {
+          text: "Não",
+          style: 'cancel'
+        }
+      ]
+    )
+
+  }
+
   render() {
     const { exercicio } = this.state
-    console.log(exercicio)
     return (
       <KeyboardAvoidingView
         behavior='padding'
@@ -126,6 +162,12 @@ class EditTrenio extends React.Component {
           onPress={this.onSubmit}>
           <Text style={styles.submitButton}>Editar</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={this.onDelete}>
+          <Text style={styles.delButton}>Deletar exercicio</Text>
+        </TouchableOpacity>
+
       </KeyboardAvoidingView>
     )
   }
@@ -169,10 +211,17 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: detail,
     borderRadius: 5
+  },
+  delButton: {
+    margin: 2,
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'red'
   }
 })
 
 const mapStateToProps = (state, { navigation }) => ({
+  treinoLenght: state.length,
   exercicio: state.find(exec => exec._id === navigation.state.params.id)
 })
 
