@@ -6,7 +6,7 @@ import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, 
 import { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys } from '../helpers';
 import Exercicios from '../components/Exercicios';
-import { handleAddExecs, handleAddExec } from '../redux/actions';
+import { handleAddExecs, handleAddExec, addExec } from '../redux/actions';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
@@ -24,6 +24,7 @@ class NewExec extends React.Component {
     },
     emMassa: false,
     veioDeNovoTreino: false,
+    editando: false,
     exerciciosSalvos: []
   }
 
@@ -106,11 +107,14 @@ class NewExec extends React.Component {
   }
 
   handleSubmit = () => {
-    const { exercicio } = this.state
+    let { exercicio } = this.state
+    const { treino } = this.props.navigation.state.params
+
+    exercicio.train = treino
 
     let arrayValida = validaExec(exercicio)
 
-    if (arrayValida.length > 2) {
+    if (arrayValida.length) {
 
       arrayValida = arrayValida.map(key => execNameKeys[key])
       Alert.alert(
@@ -144,11 +148,14 @@ class NewExec extends React.Component {
   }
 
   handleSaveNext = () => {
-    const { exercicio } = this.state
+    let { exercicio } = this.state
+    const { treino } = this.props.navigation.state.params
+
+    exercicio.train = treino
 
     let arrayValida = validaExec(exercicio)
 
-    if (arrayValida.length > 2) {
+    if (arrayValida.length) {
       arrayValida = arrayValida.map(key => execNameKeys[key])
       Alert.alert(
         'Erro!',
@@ -210,14 +217,35 @@ class NewExec extends React.Component {
     const { exerciciosSalvos } = this.state
 
     this.setState({
-      exercicio: exerciciosSalvos.find(exec => exec._id === _id)
+      exercicio: exerciciosSalvos.find(exec => exec._id === _id),
+      editando: true
     })
+  }
+
+  handleSaveEdit = () => {
+    const { exercicio } = this.state
+
+    this.setState(prevState => ({
+      exercicio: emptyExercicio,
+      editando: false,
+      exercicios: [
+        ...prevState.exerciciosSalvos.map(exec =>
+          exec._id === exercicio._id ?
+            exercicio :
+            exec
+        )
+      ]
+    }))
+
   }
 
   render() {
     const { treinos } = this.props
     const { treino } = this.props.navigation.state.params
-    const { exercicio, emMassa, veioDeNovoTreino } = this.state
+    const { exercicio, emMassa, veioDeNovoTreino, editando } = this.state
+
+    console.log('state', this.state)
+
     return (
       <ScrollView
         style={styles.container}>
@@ -255,7 +283,6 @@ class NewExec extends React.Component {
             onChangeText={this.handleChangeDescription} />
 
           <Text style={styles.label}>Treino</Text>
-
           <Text style={[styles.input, { textAlign: 'center' }]}>{treino}</Text>
 
           <Text style={styles.label}>Grupo Muscular</Text>
@@ -278,10 +305,18 @@ class NewExec extends React.Component {
                   onPress={this.handleSaveNext}>
                   <Text style={styles.buttonNewExec}>Salvar Exercicio e Criar mais </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={this.saveAll}>
-                  <Text style={styles.buttonNewExec}>Salvar Exercicios</Text>
-                </TouchableOpacity>
+                {editando ?
+                  <TouchableOpacity
+                    onPress={this.handleSaveEdit}>
+                    <Text style={styles.buttonNewExec}>Editar Exercicio</Text>
+                  </TouchableOpacity> :
+                  this.state.exerciciosSalvos.length > 0 &&
+                  <TouchableOpacity
+                    onPress={veioDeNovoTreino ? this.saveAll : this.saveOne}>
+                    <Text style={styles.buttonNewExec}>Salvar Exercicios</Text>
+                  </TouchableOpacity>
+
+                }
               </View>
               :
               <TouchableOpacity
@@ -365,8 +400,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addExercicio: (treino) => dispatch(handleAddExec(treino)),
-  addTreino: (treino) => dispatch(handleAddExecs(treino))
+  addExercicio: (treino) => dispatch(addExec(treino)),
+  addTreino: (treino) => dispatch(AddExecs(treino))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewExec)

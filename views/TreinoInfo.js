@@ -72,6 +72,11 @@ class TreinoInfo extends React.Component {
           onPress={() => navigation.navigate('Home')}>
           <Ionicons name='md-arrow-round-back' color={white} size={40} />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.configBtn}
+          onPress={() => navigation.navigate('Home')}>
+          <Ionicons name='md-settings' color={"black"} size={40} />
+        </TouchableOpacity>
         <View style={styles.badge}>
           <Text style={styles.badgeTitle}>{treino}</Text>
         </View>
@@ -95,7 +100,7 @@ class TreinoInfo extends React.Component {
         </ScrollView>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('NewExec', { treino })}        >
+          onPress={() => navigation.navigate('NewExec', { treino, eMassa: false, veioDeNovoTreino: false })}        >
           <Text style={styles.submitButton}>Novo Exercicio</Text>
         </TouchableOpacity>
 
@@ -111,8 +116,13 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     position: 'absolute',
-    top: 10,
+    top: 13,
     left: 10
+  },
+  configBtn: {
+    position: 'absolute',
+    top: 15,
+    right: 10
   },
   btn: {
     bottom: 3,

@@ -5,6 +5,7 @@ import TreinoInfo from './TreinoInfo'
 import NewExec from './NewExec'
 import EditTrenio from './EditTreino'
 import NewTreino from './NewTreino'
+import ConfigTreino from './ConfigTreino';
 
 const RootNavigator = createStackNavigator(
   {
@@ -37,6 +38,12 @@ const RootNavigator = createStackNavigator(
       screen: EditTrenio,
       navigationOptions: {
         title: "Editar Exercicio"
+      }
+    },
+    Config: {
+      screen: ConfigTreino,
+      navigationOptions: {
+        title: "Treino"
       }
     }
   },

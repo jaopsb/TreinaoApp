@@ -23,9 +23,9 @@ export default (state = [], action) => {
         ...action.execs
       ]
     case DEL_EXEC:
-    return[
-      ...state.filter(exec => exec._id !== action.id)
-    ]
+      return [
+        ...state.filter(exec => exec._id !== action.id)
+      ]
     default:
       return state
   }
