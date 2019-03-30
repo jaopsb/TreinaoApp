@@ -67,6 +67,9 @@ class TreinoInfo extends React.Component {
     const { navigation } = this.props
     return (
       <View style={styles.container}>
+        <View style={styles.badge}>
+          <Text style={styles.badgeTitle}>{treino}</Text>
+        </View>
         <TouchableOpacity
           style={styles.backBtn}
           onPress={() => navigation.navigate('Home')}>
@@ -74,12 +77,9 @@ class TreinoInfo extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.configBtn}
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() => navigation.navigate('Config', { treino })}>
           <Ionicons name='md-settings' color={"black"} size={40} />
         </TouchableOpacity>
-        <View style={styles.badge}>
-          <Text style={styles.badgeTitle}>{treino}</Text>
-        </View>
 
         <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
           <Text style={styles.modalTitle}>Descrição</Text>

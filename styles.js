@@ -1,5 +1,6 @@
 
 import { StyleSheet } from 'react-native'
+import { backGround, darkGrayBrown, detail, white } from './colors';
 
 export default StyleSheet.create({
   container: {
@@ -52,5 +53,19 @@ export default StyleSheet.create({
     color: white,
     backgroundColor: detail,
     borderRadius: 5
+  },
+  submitButton: {
+    margin: 30,
+    textAlign: 'center',
+    fontSize: 30,
+    color: 'white',
+    backgroundColor: detail,
+    borderRadius: 5
+  },
+  delButton: {
+    margin: 2,
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'red'
   }
 })

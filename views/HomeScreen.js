@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
-import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import dummy from '../Dummy.json'
+import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 
+import { getTitles } from '../helpers.js'
 import Treinos from '../components/Treinos'
-import { receiveExecs, handleInitalData } from '../redux/actions';
-import { white, gold, blue, backGround, goldBrown, detail, darkGrayBrown, darkBackGround } from '../colors'
-import { getTitles } from '../helpers.js';
+import { handleInitalData } from '../redux/actions'
+import { white, gold, blue, backGround, goldBrown, detail, darkBackGround } from '../colors'
 
 
 class HomeScreen extends React.Component {
@@ -21,6 +20,7 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+
     this.props.getInitialData()
   }
 
@@ -51,7 +51,7 @@ class HomeScreen extends React.Component {
             style={styles.logo}
             source={require('../assets/Logo.png')}
           />
-          <Text style={styles.logoTitle}>Treinao App</Text>
+          <Text style={styles.logoTitle}>Treinão App</Text>
         </View>
 
         <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
           !carregando && typeof (treinos) !== 'Object' ?
             <Treinos showSneakPeek={this.sneakPeek} />
             :
-            <Text style={styles.noTreino}>Não há treinos!! Vai criar monstrooo</Text>
+            <Text style={styles.noTreino}>Não há treinos!!</Text>
         }
 
         <TouchableOpacity
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 10,//60,
     right: 10,
   },
   logoContainer: {
@@ -157,7 +157,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
     color: 'red'
-  }
+  },
+
 })
 
 const mapStateToProps = (state) => ({

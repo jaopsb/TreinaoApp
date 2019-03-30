@@ -4,6 +4,7 @@ import Middleware from './middleware'
 
 const configureStore = () => {
   const store = createStore(Reducer, Middleware);
+
   return store;
 };
 

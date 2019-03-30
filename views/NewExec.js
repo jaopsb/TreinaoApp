@@ -6,7 +6,7 @@ import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, 
 import { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys } from '../helpers';
 import Exercicios from '../components/Exercicios';
-import { handleAddExecs, handleAddExec, addExec } from '../redux/actions';
+import { handleAddExecs, handleAddExec, addExec, addExecs } from '../redux/actions';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
@@ -401,7 +401,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addExercicio: (treino) => dispatch(addExec(treino)),
-  addTreino: (treino) => dispatch(AddExecs(treino))
+  addTreino: (treino) => dispatch(addExecs(treino))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewExec)

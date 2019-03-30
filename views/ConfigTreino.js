@@ -1,17 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Alert, View, TextInput, TouchableOpacity, Text } from 'react-native'
-
-
-
+import { Alert, View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native'
+import { backGround } from '../colors';
+import styles from '../styles'
+import { delExec, editExec } from '../redux/actions';
 class ConfigTreino extends React.Component {
   state = {
     treino: ''
   }
 
   componentWillReceiveProps(nextProps) {
-    const { treino } = nextProps.navigation.state.params
-    this.setState({ treino })
+    const { treinoAntigo } = nextProps
+    this.setState({ treino: treinoAntigo })
+  }
+
+  componentDidMount() {
+    const { treinoAntigo } = this.props
+
+    this.setState({ treino: treinoAntigo })
   }
 
   handleChangeName = (text) => {
@@ -20,9 +26,18 @@ class ConfigTreino extends React.Component {
     })
   }
 
-  changeTrain = () => {
+  changeTrainName = () => {
     const { treino } = this.state
-    const { treinos, treinoAntigo } = this.props
+    const { treinos, treinoAntigo, dispatch, navigation } = this.props
+
+    if (treino === '' || treino.match(/^ *$/) !== null)
+      return Alert.alert(
+        'Erro',
+        'O treino não pode ficar sem nome!!!!',
+        [
+          { text: 'Ok, me desculpe', style: 'cancel' }
+        ]
+      )
 
     Alert.alert(
       "Confirmar",
@@ -33,13 +48,34 @@ class ConfigTreino extends React.Component {
           text: "Sim",
           onPress: () => {
             treinos.map(exec => {
-              this.props.editExec({
+              dispatch(editExec({
                 ...exec,
                 train: treino
-              })
+              }))
             })
 
-            this.props.navigation.navigate('TreinoInfo', { treino })
+            navigation.navigate('TreinoInfo', { treino })
+          }
+        }
+      ]
+    )
+  }
+
+  deleteTrain = () => {
+    const { treino } = this.state
+    const { treinos, dispatch, navigation } = this.props
+    Alert.alert(
+      "Deletar",
+      `Deseja deletar o treino ${treino}?`,
+      [
+        { text: "Não", style: 'cancel' },
+        {
+          text: "Sim",
+          onPress: () => {
+            treinos.map(exec => {
+              dispatch(delExec(exec._id))
+            })
+            navigation.navigate('Home')
           }
         }
       ]
@@ -50,20 +86,20 @@ class ConfigTreino extends React.Component {
     const { treino } = this.state
     return (
       <View style={styles.container}>
-        <Text>Config</Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, { marginTop: 40 }]}
           placeholder='Nome do Treino'
           value={treino}
           onChangeText={this.handleChangeName} />
 
         <TouchableOpacity
-          onPress={this.changeTrain}>
-          <Text>Editar</Text>
+          onPress={this.changeTrainName}>
+          <Text style={styles.submitButton}>Editar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
-          <Text>Excluir Treino</Text>
+        <TouchableOpacity
+          onPress={this.deleteTrain}>
+          <Text style={styles.delButton}>Excluir Treino</Text>
         </TouchableOpacity>
       </View>
     )

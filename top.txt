@@ -1,0 +1,12 @@
+ad: {
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 0
+  }
+
+ <AdMobBanner
+          style={styles.ad}
+          bannerSize="leaderboard"
+          adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+          testDeviceID="EMULATOR"
+          onDidFailToReceiveAdWithError={this.bannerError} />
