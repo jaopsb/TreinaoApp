@@ -129,6 +129,7 @@ class EditTrenio extends React.Component {
       <KeyboardAvoidingView
         behavior='padding'
         style={styles.container}>
+
         <TextInput
           style={styles.input}
           value={exercicio.name}

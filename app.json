@@ -11,7 +11,7 @@
     ],
     "version": "2.0.5",
     "orientation": "portrait",
-    "icon": "./assets/dumbell.png",
+    "icon": "./assets/LogoTreinaoApp-2.png",
     "splash": {
       "image": "./assets/dumbell.png",
       "resizeMode": "contain",

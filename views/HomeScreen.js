@@ -80,6 +80,7 @@ class HomeScreen extends React.Component {
 
         <AdMobBanner
           bannerSize="smartBannerLandscape"
+          style={styles.bottomBanner}
           adUnitID={bannerFreeUnitId} // Test ID, Replace with your-admob-unit-id
           testDevices={[AdMobBanner.simulatorId]}
           didFailToReceiveAdWithError={this.bannerError} />
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
   },
   bottomBanner: {
     position: "absolute",
+    bottom: 0
   },
   icon: {
     position: 'absolute',
@@ -175,7 +177,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getInitialData: () => dispatch(handleInitalData())
+  getInitialData: () => dispatch(handleInitalDummyData())
 
 })
 
