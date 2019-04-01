@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "2.0.0",
+    "version": "2.0.5",
     "orientation": "portrait",
     "icon": "./assets/dumbell.png",
     "splash": {
@@ -29,7 +29,14 @@
     },
     "android": {
       "package": "com.skullte.treinaoapp",
-      "permissions": []
-    }
+      "permissions": [],
+      "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
+      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json"
+    },
+    "isDetached": true,
+    "detach": {
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.7-sdk32.0.0-3ff7f3bf-8e53-4d61-b963-1d7d92a77d79.tar.gz"
+    },
+    "scheme": "expd83e140afb1342d3b9e65bdb8251f721"
   }
 }

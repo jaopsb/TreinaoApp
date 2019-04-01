@@ -7,7 +7,9 @@ export const TYPE = 'TYPE'
 export const TRAIN = 'TRAIN'
 export const DESC = 'DESC'
 
-export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'
+export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'//treinao pago
+export const bannerUidFree = 'ca-app-pub-2940304467930014/7961941572'//treinao free
+export const appIdFree = 'ca-app-pub-2940304467930014~3352489018'//treinao free
 export const interBannerUid = 'ca-app-pub-2940304467930014/4274031900'
 export const testeBannerUID = 'ca-app-pub-3940256099942544/6300978111'
 

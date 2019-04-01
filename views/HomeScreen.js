@@ -80,7 +80,7 @@ class HomeScreen extends React.Component {
 
         <AdMobBanner
           bannerSize="fullBanner"
-          adUnitID={bannerUid} // Test ID, Replace with your-admob-unit-id
+          adUnitID={bannerUidFree} // Test ID, Replace with your-admob-unit-id
           testDevices={[AdMobBanner.simulatorId]}
           didFailToReceiveAdWithError={this.bannerError} />
       </View>
