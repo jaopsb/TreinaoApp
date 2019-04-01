@@ -7,9 +7,13 @@ export const TYPE = 'TYPE'
 export const TRAIN = 'TRAIN'
 export const DESC = 'DESC'
 
-export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'
-export const interBannerUid = 'ca-app-pub-2940304467930014/4274031900'
+export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'//antigo
+export const bannerFreeUnitId = 'ca-app-pub-2940304467930014/7961941572'
+export const interBannerFreeUnitId = 'ca-app-pub-2940304467930014/4136755947'
+
+//tests
 export const testeBannerUID = 'ca-app-pub-3940256099942544/6300978111'
+export const testeInterBannerUnitId = 'ca-app-pub-3940256099942544/1033173712'
 
 export const gruposMusc = [
   'Ombros',

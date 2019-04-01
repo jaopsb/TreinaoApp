@@ -4,9 +4,9 @@ import { Alert, View, TextInput, TouchableOpacity, Text } from 'react-native'
 import styles from '../styles'
 import { delExec, editExec } from '../redux/actions';
 import { AdMobInterstitial } from 'expo-ads-admob';
-import { interBannerUid } from '../helpers';
+import { testeInterBannerUnitId, interBannerFreeUnitId } from '../helpers';
 
-AdMobInterstitial.setAdUnitID(interBannerUid);
+AdMobInterstitial.setAdUnitID(interBannerFreeUnitId);
 AdMobInterstitial.setTestDeviceID('EMULATOR');
 class ConfigTreino extends React.Component {
   state = {
@@ -31,7 +31,8 @@ class ConfigTreino extends React.Component {
 
   showInterstitial = async () => {
     await AdMobInterstitial.requestAdAsync()
-    await AdMobInterstitial.showAdAsync()
+      .then(() => AdMobInterstitial.showAdAsync())
+      .catch(() => { })
   }
 
 
@@ -91,7 +92,9 @@ class ConfigTreino extends React.Component {
               dispatch(delExec(exec._id))
             })
 
-            navigation.navigate('Home')
+            this.showInterstitial()
+              .catch(() => navigation.navigate('Home'))
+              .then(() => navigation.navigate('Home'))
           }
         }
       ]

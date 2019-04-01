@@ -4,7 +4,7 @@ import Modal from 'react-native-modalbox'
 import { Feather } from '@expo/vector-icons'
 import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { AdMobBanner } from 'expo'
-import { getTitles, testeBannerUID, bannerUid } from '../helpers.js'
+import { getTitles, testeBannerUID, bannerUid, bannerFreeUnitId } from '../helpers.js'
 import Treinos from '../components/Treinos'
 import { handleInitalData, handleInitalDummyData } from '../redux/actions'
 import { white, gold, blue, backGround, goldBrown, detail, darkBackGround } from '../colors'
@@ -69,7 +69,7 @@ class HomeScreen extends React.Component {
           !carregando && typeof (treinos) !== 'Object' ?
             <Treinos showSneakPeek={this.sneakPeek} />
             :
-            <Text style={styles.noTreino}>Não há treinos!!</Text>
+            <Text style={styles.noTreino}>{`Não há treinos!!\nClique no icone + para criar!`}</Text>
         }
 
         <TouchableOpacity
@@ -79,8 +79,8 @@ class HomeScreen extends React.Component {
         </TouchableOpacity>
 
         <AdMobBanner
-          bannerSize="fullBanner"
-          adUnitID={bannerUid} // Test ID, Replace with your-admob-unit-id
+          bannerSize="smartBannerLandscape"
+          adUnitID={bannerFreeUnitId} // Test ID, Replace with your-admob-unit-id
           testDevices={[AdMobBanner.simulatorId]}
           didFailToReceiveAdWithError={this.bannerError} />
       </View>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   noTreino: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 30,
     color: 'red'
   },
 
