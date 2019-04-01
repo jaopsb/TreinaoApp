@@ -28,6 +28,7 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 3,
       "package": "com.skullte.treinaoapp",
       "permissions": []
     }
