@@ -153,6 +153,7 @@ class EditTrenio extends React.Component {
         <TextInput
           style={[styles.input, { padding: 3 }]}
           multiline={true}
+          numberOfLines={3}
           autoCapitalize='sentences'
           value={exercicio.description}
           placeholder="Descrição"

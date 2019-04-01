@@ -1,9 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Alert, View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native'
-import { backGround } from '../colors';
+import { Alert, View, TextInput, TouchableOpacity, Text } from 'react-native'
 import styles from '../styles'
 import { delExec, editExec } from '../redux/actions';
+import { AdMobInterstitial } from 'expo-ads-admob';
+import { interBannerUid } from '../helpers';
+
+AdMobInterstitial.setAdUnitID(interBannerUid);
+AdMobInterstitial.setTestDeviceID('EMULATOR');
 class ConfigTreino extends React.Component {
   state = {
     treino: ''
@@ -18,7 +22,18 @@ class ConfigTreino extends React.Component {
     const { treinoAntigo } = this.props
 
     this.setState({ treino: treinoAntigo })
+
   }
+
+  componentWillUnmount() {
+    AdMobInterstitial.removeAllListeners();
+  }
+
+  showInterstitial = async () => {
+    await AdMobInterstitial.requestAdAsync()
+    await AdMobInterstitial.showAdAsync()
+  }
+
 
   handleChangeName = (text) => {
     this.setState({
@@ -75,6 +90,7 @@ class ConfigTreino extends React.Component {
             treinos.map(exec => {
               dispatch(delExec(exec._id))
             })
+
             navigation.navigate('Home')
           }
         }

@@ -8,6 +8,10 @@ export default StyleSheet.create({
     backgroundColor: backGround,
     flexDirection: 'column'
   },
+  bottomBanner: {
+    position: "absolute",
+    bottom: 0
+  },
   label: {
     width: '100%',
     textAlign: 'center',

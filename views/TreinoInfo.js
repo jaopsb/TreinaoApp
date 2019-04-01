@@ -35,7 +35,6 @@ class TreinoInfo extends React.Component {
 
   renderItem = ({ item }) => {
     const { _id, rep, serie, type, name, charge, description } = item
-
     return (
       <View key={_id} style={{ flex: 1 }}>
         <TouchableOpacity
@@ -63,8 +62,7 @@ class TreinoInfo extends React.Component {
 
   render() {
     const { treino } = this.props.navigation.state.params
-    const { treinos } = this.props
-    const { navigation } = this.props
+    const { treinos, navigation } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.badge}>

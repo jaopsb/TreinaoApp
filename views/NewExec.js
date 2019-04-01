@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
-import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys } from '../helpers';
+import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys, VALID_SPACE } from '../helpers';
 import Exercicios from '../components/Exercicios';
-import { handleAddExecs, handleAddExec, addExec, addExecs } from '../redux/actions';
+import { addExec, addExecs } from '../redux/actions';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
@@ -16,6 +16,7 @@ class NewExec extends React.Component {
       charge: '',
       rep: '',
       serie: 0,
+      description: '',
       type: '',
       train: '',
       _id: '',
@@ -114,14 +115,18 @@ class NewExec extends React.Component {
 
     let arrayValida = validaExec(exercicio)
 
+    if (exercicio.name.match(VALID_SPACE).length > 0)
+      arrayValida.concat('name')
+
     if (arrayValida.length) {
 
       arrayValida = arrayValida.map(key => execNameKeys[key])
+
       Alert.alert(
         'Erro!',
-        arrayValida.length === 0 ?
-          `O campo ${arrayValida} esta vazio` :
-          `Os campos ${arrayValida} estão vazios`,
+        arrayValida.length > 1 ?
+          `Os campos ${arrayValida} estão vazios` :
+          `O campo ${arrayValida} esta vazio`,
         [
           { text: 'OK', style: 'cancel' }
         ]
@@ -155,6 +160,9 @@ class NewExec extends React.Component {
 
     let arrayValida = validaExec(exercicio)
 
+    if (exercicio.name.match(VALID_SPACE))
+      arrayValida.push('name')
+
     if (arrayValida.length) {
       arrayValida = arrayValida.map(key => execNameKeys[key])
       Alert.alert(
@@ -170,15 +178,16 @@ class NewExec extends React.Component {
       //hack
       exercicio._id = uuid()
 
-      if (exercicio.description === '') exercicio.description = 'Sem descrição'
+      if (exercicio.description === ' ')
+        exercicio.description = 'Sem descrição'
 
       this.setState(prevState => (
         {
-          exercicio: emptyExercicio,
           exerciciosSalvos: [
             ...prevState.exerciciosSalvos,
             exercicio
-          ]
+          ],
+          exercicio: emptyExercicio,
         })
       )
     }
@@ -226,7 +235,6 @@ class NewExec extends React.Component {
     const { exercicio } = this.state
 
     this.setState(prevState => ({
-      exercicio: emptyExercicio,
       editando: false,
       exercicios: [
         ...prevState.exerciciosSalvos.map(exec =>
@@ -234,17 +242,15 @@ class NewExec extends React.Component {
             exercicio :
             exec
         )
-      ]
+      ],
+      exercicio: emptyExercicio
     }))
 
   }
 
   render() {
-    const { treinos } = this.props
     const { treino } = this.props.navigation.state.params
     const { exercicio, emMassa, veioDeNovoTreino, editando } = this.state
-
-    console.log('state', this.state)
 
     return (
       <ScrollView
@@ -275,7 +281,7 @@ class NewExec extends React.Component {
             onChangeText={this.handleChangeSerie} />
           <TextInput
             style={styles.input}
-            placeholder='Descrição'
+            placeholder='Descrição (Opcional)'
             multiline={true}
             numberOfLines={3}
             autoCapitalize='sentences'

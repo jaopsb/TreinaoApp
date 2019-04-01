@@ -7,6 +7,10 @@ export const TYPE = 'TYPE'
 export const TRAIN = 'TRAIN'
 export const DESC = 'DESC'
 
+export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'
+export const interBannerUid = 'ca-app-pub-2940304467930014/4274031900'
+export const testeBannerUID = 'ca-app-pub-3940256099942544/6300978111'
+
 export const gruposMusc = [
   'Ombros',
   'Biceps',
@@ -21,6 +25,7 @@ export const emptyExercicio = {
   name: '',
   charge: '',
   rep: '',
+  description: '',
   serie: 0,
   type: '',
   train: '',
@@ -46,6 +51,8 @@ export const logInfo = (title, info) => {
 
 const VALID_EMAIL = new RegExp(/\b[\w-]+@[\w-]+\.\w{2,4}\b/gi)
 
+export const VALID_SPACE = new RegExp(/^\s*$/)
+
 const isEmail = (email) => email.match(VALID_EMAIL)
 
 /* exporta validacao de email por RegExp*/
@@ -59,11 +66,7 @@ export const validaUser = (user) => {
 /* valida se todos os campos obrigatorios do exercicio estao preenchidos */
 //TODO:  RETIRAR VALIDACAO DE _ID E DE OWNER,TEM QUE ESTAR PREENCHIDAS
 export const validaExec = (exec) => {
-  delete exec._id
-  delete exec.owner
-  delete exec.description
-
-  return Object.keys(exec).filter(key => exec[key] === "")
+  return Object.keys(exec).filter(key => exec[key] === "" && key !== 'description' && key !== 'owner' && key !== '_id')
 }
 
 /*GetTrains - busca todos os treinos (train) ques estao na lista */

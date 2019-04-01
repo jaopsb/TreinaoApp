@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\hiarr\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Users\hiarr\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add global expo-cli
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\hiarr\AppData\Local\Microsoft\WindowsApps;C:\Users\hiarr\AppData\Roaming\npm;C:\Users\hiarr\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin
+  C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Calibre2\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\nodejs\;C:\Users\hiarr\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\hiarr\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\hiarr\AppData\Roaming\npm
 
 Yarn version: 
   1.13.0
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, scandir 'C:\Users\hiarr\Documents\projetos\TreinaoApp\node_modules\@types'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\hiarr\Desktop\projetos\treinaoapp\node_modules\.cache\@babel'
 
 npm manifest: 
   {
@@ -26,7 +26,7 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
-      "expo": "^32.0.0",
+      "expo": "^32.0.6",
       "react": "16.5.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
       "react-native-modalbox": "^1.7.1",
@@ -2420,7 +2420,7 @@ Lockfile:
       expo-errors "~1.0.0"
       expo-task-manager-interface "~1.0.0"
   
-  expo@^32.0.0:
+  expo@^32.0.6:
     version "32.0.6"
     resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.6.tgz#71ef60ac5293b9ca8f2219584bc6add8a975714b"
     integrity sha512-LMFtWZY+lwMHkoThTBwirctPB/5WeZtGrVM8MVoCI1e7jlONOfNQceM6X2j06BO5HxcCF/ASJSUDiTIIStAeaA==

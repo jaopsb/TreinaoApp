@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import { Alert, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
-import { getTrains, getTypes, validaExec } from '../helpers';
+import { getTrains, getTypes, validaExec, VALID_SPACE } from '../helpers';
 
 class NewTreino extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class NewTreino extends React.Component {
   handleSubmit = () => {
     const { treino } = this.state
     const { treinos, navigation } = this.props
-    if (treino === '') {
+    if (treino === '' || treino.match(VALID_SPACE)) {
       return Alert.alert(
         'NAAAAO',
         'O nome do treino nao pode ser vazio!!',

@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
 import { Feather } from '@expo/vector-icons'
 import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
-
-import { getTitles } from '../helpers.js'
+import { AdMobBanner } from 'expo'
+import { getTitles, testeBannerUID, bannerUid } from '../helpers.js'
 import Treinos from '../components/Treinos'
-import { handleInitalData } from '../redux/actions'
+import { handleInitalData, handleInitalDummyData } from '../redux/actions'
 import { white, gold, blue, backGround, goldBrown, detail, darkBackGround } from '../colors'
-
 
 class HomeScreen extends React.Component {
   state = {
@@ -49,7 +48,7 @@ class HomeScreen extends React.Component {
         <View style={styles.logoContainer}>
           <Image
             style={styles.logo}
-            source={require('../assets/Logo.png')}
+            source={require('../assets/dumbell.png')}
           />
           <Text style={styles.logoTitle}>Treinão App</Text>
         </View>
@@ -78,6 +77,12 @@ class HomeScreen extends React.Component {
           onPress={() => this.props.navigation.navigate('NewTreino', { treino: '' })}>
           <Feather name='plus-circle' size={50} color={goldBrown} />
         </TouchableOpacity>
+
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitID={bannerUid} // Test ID, Replace with your-admob-unit-id
+          testDevices={[AdMobBanner.simulatorId]}
+          didFailToReceiveAdWithError={this.bannerError} />
       </View>
     )
   }
@@ -89,9 +94,12 @@ const styles = StyleSheet.create({
     backgroundColor: backGround,
     flexDirection: 'column'
   },
+  bottomBanner: {
+    position: "absolute",
+  },
   icon: {
     position: 'absolute',
-    bottom: 10,//60,
+    bottom: 60,//60,
     right: 10,
   },
   logoContainer: {

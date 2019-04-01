@@ -3,17 +3,17 @@
     "name": "TreinaoApp",
     "slug": "TreinaoApp",
     "privacy": "public",
-    "sdkVersion": "30.0.0",
+    "sdkVersion": "32.0.0",
     "primaryColor": "#bd9875",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Logo.png",
+    "icon": "./assets/dumbell.png",
     "splash": {
-      "image": "./assets/Logo.png",
+      "image": "./assets/dumbell.png",
       "resizeMode": "contain",
       "backgroundColor": "#d6bfa9"
     },
@@ -24,11 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.JaoCompany.treinaoapp",
+      "bundleIdentifier": "com.skullte.treinaoapp",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.JaoCompany.treinaoapp",
+      "package": "com.skullte.treinaoapp",
       "permissions": []
     }
   }
