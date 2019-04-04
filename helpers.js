@@ -107,8 +107,7 @@ export const getListTrainAndTypes = (treinos) =>
 
 
 
-export const privacy_policy = `
-## Privacy Policy
+export const privacy_policy = `## Privacy Policy
 
 João Pedro de Salles Braga built the Treinão App app as an Ad Supported app. This SERVICE is provided by João Pedro de Salles Braga at no cost and is intended for use as is.
 
@@ -120,7 +119,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
 **Information Collection and Use**
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Unit ad id. The information that I request will be retained on your device and is not collected by me in any way.
+For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Android Advertising ID.The service (AdMob) uses the ID to provide advertisement for the app.  The information that I request will be retained on your device and is not collected by me in any way.
 
 The app does use third party services that may collect information used to identify you.
 
@@ -167,4 +166,5 @@ I may update our Privacy Policy from time to time. Thus, you are advised to revi
 
 **Contact Us**
 
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at <treinaoapp@gmail.com>.`
+If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at treinaoapp@gmail.com.
+`

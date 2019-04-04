@@ -75,7 +75,7 @@ class HomeScreen extends React.Component {
           !carregando && typeof (treinos) !== 'Object' ?
             <Treinos showSneakPeek={this.sneakPeek} />
             :
-            <Text style={styles.noTreino}>{`Não há treinos!!\nClique no icone + para criar!`}</Text>
+            <Text style={[styles.noTreino, { flex: 1 }]}>{`Não há treinos!!\nClique no icone + para criar!`}</Text>
         }
 
         <TouchableOpacity
@@ -102,7 +102,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   bottomBanner: {
-    bottom: 0
+    bottom: 0,
+    flex: 1,
+    justifyContent: 'flex-end'
   },
   configBtn: {
     position: 'absolute',

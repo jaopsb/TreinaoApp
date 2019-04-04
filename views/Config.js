@@ -29,7 +29,7 @@ João Pedro de Salles Braga.`
             flex: 1,
             justifyContent: 'flex-end',
           }}
-          onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
+          onPress={() => Linking.openURL('https://github.com/jaopsb/TreinaoApp/blob/master/privacy_policy.md')}>
           <Text style={styles.submitButton}>Política de Privacidade</Text>
         </TouchableOpacity>
       </View>
