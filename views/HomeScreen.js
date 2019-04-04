@@ -8,6 +8,7 @@ import { getTitles, testeBannerUID, bannerUid, bannerFreeUnitId } from '../helpe
 import Treinos from '../components/Treinos'
 import { handleInitalData, handleInitalDummyData } from '../redux/actions'
 import { white, gold, blue, backGround, goldBrown, detail, darkBackGround } from '../colors'
+import { Ionicons } from '@expo/vector-icons'
 
 class HomeScreen extends React.Component {
   state = {
@@ -42,7 +43,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const { carregando, titles } = this.state
-    const { treinos } = this.props
+    const { treinos, navigation } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
@@ -52,6 +53,11 @@ class HomeScreen extends React.Component {
           />
           <Text style={styles.logoTitle}>Treinão App</Text>
         </View>
+        <TouchableOpacity
+          style={styles.configBtn}
+          onPress={() => navigation.navigate('Config')}>
+          <Ionicons name='md-settings' color={"black"} size={50} />
+        </TouchableOpacity>
 
         <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
           <Text style={styles.modalTitle}>Exercicios</Text>
@@ -96,21 +102,25 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   bottomBanner: {
-    position: "absolute",
     bottom: 0
+  },
+  configBtn: {
+    position: 'absolute',
+    top: 15,
+    right: 10
   },
   icon: {
     position: 'absolute',
-    bottom: 60,//60,
-    right: 10,
+    top: 15,
+    left: 15
   },
   logoContainer: {
     alignItems: 'center',
     margin: 5
   },
   logo: {
-    width: 100,
-    height: 100
+    width: 80,
+    height: 80
   },
   logoTitle: {
     textAlign: 'center',
@@ -177,7 +187,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getInitialData: () => dispatch(handleInitalDummyData())
+  getInitialData: () => dispatch(handleInitalData())
 
 })
 

@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native'
-import { backGround, darkGrayBrown, detail, white } from './colors';
+import { backGround, darkGrayBrown, detail, white, darkBackGround } from './colors';
 
 export default StyleSheet.create({
   container: {
@@ -19,6 +19,16 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'black',
     top: 0,
+  },
+  configBtn: {
+    position: 'absolute',
+    top: 15,
+    right: 15
+  },
+  icon: {
+    position: 'absolute',
+    bottom: 60,//60,
+    right: 10,
   },
   input: {
     fontSize: 25,
@@ -41,6 +51,16 @@ export default StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     color: white
+  },
+  treinoContainer: {
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 10,
+    padding: 5,
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 3,
+    borderRadius: 5
   },
   submitButton: {
     margin: 30,
@@ -65,6 +85,19 @@ export default StyleSheet.create({
     color: 'white',
     backgroundColor: detail,
     borderRadius: 5
+  },
+  link: {
+    color: 'black',
+    textDecorationLine: 'underline'
+  },
+  textThanksContainer: {
+    padding: 5,
+    backgroundColor: darkBackGround
+  },
+  textThanks: {
+    fontSize: 20,
+    color: white,
+    padding: 10,
   },
   delButton: {
     margin: 2,

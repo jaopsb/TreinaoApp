@@ -75,7 +75,7 @@ class TreinoInfo extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.configBtn}
-          onPress={() => navigation.navigate('Config', { treino })}>
+          onPress={() => navigation.navigate('ConfigTreino', { treino })}>
           <Ionicons name='md-settings' color={"black"} size={40} />
         </TouchableOpacity>
 

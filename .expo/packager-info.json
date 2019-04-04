@@ -1,9 +1,9 @@
 {
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 10852,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://aj-mx2.anonymous.treinaoapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.aj-mx2.anonymous.treinaoapp.exp.direct",
+  "ngrokPid": 1264,
   "devToolsPort": 19002
 }
