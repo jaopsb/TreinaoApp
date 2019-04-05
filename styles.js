@@ -76,22 +76,26 @@ export default StyleSheet.create({
     fontSize: 50,
     alignSelf: 'center',
   },
+  backBtn: {
+    position: 'absolute',
+    top: 13,
+    left: 10
+  },
   cardContainer: {
-    margin: 5,
-    paddingTop: 5,
-    paddingLeft: 5,
     backgroundColor: darkGrayBrown,
     borderColor: darkGrayBrown,
     borderWidth: 5,
-    borderRadius: 5
+    borderRadius: 10
   },
   cardTitle: {
+    marginLeft: 10,
     fontSize: 30,
     color: detail
   },
   cardRow: {
     flexDirection: 'row',
     paddingTop: 2,
+    margin: 10,
     paddingBottom: 2
   },
   cardText: {
@@ -101,8 +105,8 @@ export default StyleSheet.create({
   },
   editIcon: {
     position: 'absolute',
-    right: 0,
-    bottom: 3
+    right: 7,
+    top: 5
   },
   input: {
     margin: 5,

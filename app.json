@@ -15,7 +15,7 @@
     "splash": {
       "image": "./assets/dumbell.png",
       "resizeMode": "contain",
-      "backgroundColor": "#d6bfa9"
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

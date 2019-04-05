@@ -50,13 +50,13 @@ class TreinoInfo extends React.Component {
             </View>
             <View style={styles.cardRow}>
               <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
-              <TouchableOpacity
-                style={styles.editIcon}
-                onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-                <Feather name='edit' size={30} color={icon} />
-              </TouchableOpacity>
             </View>
           </Card>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.editIcon}
+          onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
+          <Feather name='edit' size={30} color={icon} />
         </TouchableOpacity>
       </View>
     )
@@ -93,6 +93,7 @@ class TreinoInfo extends React.Component {
 
         <ScrollView>
           <FlatList
+            style={{ flex: 1, margin: 5 }}
             data={treinos}
             keyExtractor={this.keyExtractor}
             renderItem={this.renderItem}
@@ -117,11 +118,105 @@ export default connect(mapStateToProps)(TreinoInfo)
 
 
 /*
-Guardado para depois -> criar modal
-{
-    toggleDescription && idDescription === _id &&
-    <View style={styles.descriptionContainer}>
-      <Text style={styles.descriptionText}>{description}</Text>
-    </View>
+G
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: backGround,
+  },
+  backBtn: {
+    position: 'absolute',
+    top: 13,
+    left: 10
+  },
+  configBtn: {
+    position: 'absolute',
+    top: 15,
+    right: 10
+  },
+  btn: {
+    bottom: 3,
+    margin: 10,
+    justifyContent: 'flex-end'
+  },
+  btnText: {
+    fontSize: 25,
+    color: 'red',
+  },
+  modal: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: backGround,
+    alignItems: 'center',
+    height: 250,
+    width: 300
+  },
+  modalTitle: {
+    color: detail,
+    fontSize: 40,
+    justifyContent: 'center',
+  },
+  modalText: {
+    margin: 10,
+    fontSize: 25,
+    color: white,
+  },
+  badge: {
+    top: 1,
+    marginBottom: 5,
+    width: '100%',
+  },
+  badgeTitle: {
+    color: title,
+    fontWeight: 'bold',
+    fontSize: 50,
+    alignSelf: 'center',
+  },
+  cardContainer: {
+    margin: 5,
+    paddingTop: 5,
+    paddingLeft: 5,
+    backgroundColor: darkGrayBrown,
+    borderColor: darkGrayBrown,
+    borderWidth: 5,
+    borderRadius: 5
+  },
+  cardTitle: {
+    fontSize: 30,
+    color: white
+  },
+  cardRow: {
+    flexDirection: 'row',
+    paddingTop: 2,
+    paddingBottom: 2
+  },
+  cardText: {
+    margin: 2,
+    fontSize: 15,
+    color: white
+  },
+  editIcon: {
+    position: 'absolute',
+    right: 0,
+    bottom: 3
+  },
+  descriptionContainer: {
+    margin: 10,
+    padding: 5,
+    borderColor: white,
+    borderWidth: 1,
+  },
+  descriptionText: {
+    fontSize: 20,
+    color: white
+  },
+  submitButton: {
+    margin: 10,
+    textAlign: 'center',
+    fontSize: 30,
+    color: white,
+    backgroundColor: darkGrayBrown,
+    borderRadius: 5
   }
+})
   */
