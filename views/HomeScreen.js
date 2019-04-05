@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
-import { Feather } from '@expo/vector-icons'
 import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { AdMobBanner } from 'expo'
 import { getTitles, testeBannerUID, bannerUid, bannerFreeUnitId } from '../helpers.js'
 import Treinos from '../components/Treinos'
 import { handleInitalData, handleInitalDummyData } from '../redux/actions'
-import { white, gold, blue, backGround, goldBrown, detail, darkBackGround } from '../colors'
-import { Ionicons } from '@expo/vector-icons'
+import { white, gold, blue, backGround, goldBrown, detail, darkBackGround, colorIcon, title } from '../colors'
+import { Ionicons, Feather } from '@expo/vector-icons'
 
 class HomeScreen extends React.Component {
   state = {
@@ -81,11 +80,11 @@ class HomeScreen extends React.Component {
         <TouchableOpacity
           style={styles.icon}
           onPress={() => this.props.navigation.navigate('NewTreino', { treino: '' })}>
-          <Feather name='plus-circle' size={50} color={goldBrown} />
+          <Feather name='plus-circle' size={50} color={colorIcon} />
         </TouchableOpacity>
 
         <AdMobBanner
-          bannerSize="smartBannerLandscape"
+          bannerSize="smartBannerPortrait"
           style={styles.bottomBanner}
           adUnitID={bannerFreeUnitId} // Test ID, Replace with your-admob-unit-id
           testDevices={[AdMobBanner.simulatorId]}
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
   },
   bottomBanner: {
     bottom: 0,
-    flex: 1,
     justifyContent: 'flex-end'
   },
   configBtn: {

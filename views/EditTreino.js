@@ -1,9 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { KeyboardAvoidingView, TouchableOpacity, Alert, TextInput, Text, StyleSheet } from 'react-native'
+import { Header } from 'react-navigation-stack'
+import {
+  View,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+  Text,
+  ScrollView,
+  StatusBar
+} from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
+import { TextField } from 'react-native-material-textfield'
 import { validaExec, execNameKeys } from '../helpers'
-import { gold, styleText, green, backGround, detail, white, darkGrayBrown } from '../colors'
 import { editExec, handleEditExec, delExec } from '../redux/actions'
+import styles from '../styles';
+
+const KEYBOARD_VERTICAL_OFFSET = Header.HEIGHT + StatusBar.currentHeight;
 
 class EditTrenio extends React.Component {
 
@@ -80,9 +94,24 @@ class EditTrenio extends React.Component {
         ]
       )
     } else {
-      dispatch(editExec(exercicio))
 
-      navigation.navigate("TreinoInfo", { treino: exercicio.train })
+      Alert.alert(
+        'Confirmar',
+        'Você está certo disso?',
+        [
+          {
+            text: 'Sim',
+            onPress: () => {
+
+              dispatch(editExec(exercicio))
+                .then(() => navigation.navigate("TreinoInfo", { treino: exercicio.train }))
+            }
+          },
+          {
+            text: 'Não', style: 'cancel'
+          }
+        ]
+      )
     }
   }
 
@@ -104,6 +133,7 @@ class EditTrenio extends React.Component {
         {
           text: "Sim",
           onPress: () => {
+
             dispatch(delExec(exercicio._id))
             navigation.navigate(
               url,
@@ -128,99 +158,80 @@ class EditTrenio extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior='padding'
+        keyboardVerticalOffset={KEYBOARD_VERTICAL_OFFSET}
         style={styles.container}>
+        <ScrollView style={{ flex: 1 }}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.inner}>
+              <TouchableOpacity
+                style={styles.delIcon}
+                onPress={this.onDelete}>
+                <AntDesign name='delete' size={30} color='red' />
+              </TouchableOpacity>
 
-        <TextInput
-          style={styles.input}
-          value={exercicio.name}
-          placeholder="Nome do Exercicio"
-          onChangeText={this.onChangeName} />
-        <TextInput
-          style={styles.input}
-          value={exercicio.rep}
-          placeholder="Repetições"
-          onChangeText={this.onChangeRep} />
-        <TextInput
-          style={styles.input}
-          value={exercicio.charge}
-          placeholder="Carga"
-          onChangeText={this.onChangeCharge} />
-        <TextInput
-          style={styles.input}
-          value={`${exercicio.serie}`}
-          placeholder="Series"
-          onChangeText={this.onChangeSerie} />
+              <TextField
+                style={styles.input}
+                containerStyle={styles.inputContainer}
+                value={exercicio.name}
+                numberOfLines={1}
+                multiline={true}
+                label="Nome do Exercicio"
+                returnKeyType='next'
+                onChangeText={this.onChangeName} />
 
-        <TextInput
-          style={[styles.input, { padding: 3 }]}
-          multiline={true}
-          numberOfLines={3}
-          autoCapitalize='sentences'
-          value={exercicio.description}
-          placeholder="Descrição"
-          onChangeText={this.onChangeDescription} />
+              <TextField
+                style={styles.input}
+                containerStyle={styles.inputContainer}
+                value={exercicio.rep}
+                numberOfLines={1}
+                multiline={true}
+                label="Repetições"
+                returnKeyType='next'
+                onChangeText={this.onChangeRep} />
 
-        <TouchableOpacity
-          onPress={this.onSubmit}>
-          <Text style={styles.submitButton}>Editar</Text>
-        </TouchableOpacity>
+              <TextField
+                style={styles.input}
+                containerStyle={styles.inputContainer}
+                value={exercicio.charge}
+                numberOfLines={1}
+                multiline={true}
+                label="Carga"
+                returnKeyType='next'
+                onChangeText={this.onChangeCharge} />
 
-        <TouchableOpacity
-          onPress={this.onDelete}>
-          <Text style={styles.delButton}>Deletar exercicio</Text>
-        </TouchableOpacity>
+              <TextField
+                style={styles.input}
+                containerStyle={styles.inputContainer}
+                value={`${exercicio.serie}`}
+                numberOfLines={1}
+                multiline={true}
+                keyboardType='numeric'
+                label="Series"
+                returnKeyType='next'
+                onChangeText={this.onChangeSerie} />
 
+              <TextField
+                style={styles.inputDescription}
+                containerStyle={styles.inputDescription}
+                label='Descrição'
+                multiline={true}
+                numberOfLines={3}
+                autoCapitalize='sentences'
+                value={exercicio.description}
+                onChangeText={this.onChangeDescription} />
+
+              <TouchableOpacity
+                onPress={this.onSubmit}>
+                <Text style={styles.submitButton}>Editar</Text>
+              </TouchableOpacity>
+
+            </View>
+          </SafeAreaView>
+        </ScrollView>
       </KeyboardAvoidingView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: backGround
-  },
-  wrapper: {
-    flex: 1,
-    margin: 3,
-    marginTop: 10
-  },
-  inputWrapper: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  label: {
-    left: 5,
-    fontSize: 15,
-    color: detail,
-    top: 0,
-  },
-  input: {
-    fontSize: 25,
-    backgroundColor: darkGrayBrown,
-    borderColor: darkGrayBrown,
-    borderWidth: 3,
-    borderRadius: 5,
-    color: white,
-    margin: 5,
-    padding: 3
-  },
-  submitButton: {
-    margin: 30,
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
-    backgroundColor: detail,
-    borderRadius: 5
-  },
-  delButton: {
-    margin: 2,
-    textAlign: 'center',
-    fontSize: 20,
-    color: 'red'
-  }
-})
 
 const mapStateToProps = (state, { navigation }) => ({
   treinoLenght: state.length,

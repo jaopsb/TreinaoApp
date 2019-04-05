@@ -6,8 +6,8 @@ import { delExec, editExec } from '../redux/actions';
 import { AdMobInterstitial } from 'expo-ads-admob';
 import { testeInterBannerUnitId, interBannerFreeUnitId } from '../helpers';
 
-AdMobInterstitial.setAdUnitID(interBannerFreeUnitId);
-AdMobInterstitial.setTestDeviceID('EMULATOR');
+AdMobInterstitial.setAdUnitID(interBannerFreeUnitId)
+
 class ConfigTreino extends React.Component {
   state = {
     treino: ''
@@ -20,21 +20,8 @@ class ConfigTreino extends React.Component {
 
   componentDidMount() {
     const { treinoAntigo } = this.props
-
     this.setState({ treino: treinoAntigo })
-
   }
-
-  componentWillUnmount() {
-    AdMobInterstitial.removeAllListeners();
-  }
-
-  showInterstitial = async () => {
-    await AdMobInterstitial.requestAdAsync()
-      .then(() => AdMobInterstitial.showAdAsync())
-      .catch(() => { })
-  }
-
 
   handleChangeName = (text) => {
     this.setState({
@@ -42,6 +29,11 @@ class ConfigTreino extends React.Component {
     })
   }
 
+  showAdAsync = async () => {
+    await AdMobInterstitial.requestAdAsync();
+    await AdMobInterstitial.showAdAsync();
+
+  }
   changeTrainName = () => {
     const { treino } = this.state
     const { treinos, treinoAntigo, dispatch, navigation } = this.props
@@ -92,8 +84,7 @@ class ConfigTreino extends React.Component {
               dispatch(delExec(exec._id))
             })
 
-            this.showInterstitial()
-              .catch(() => navigation.navigate('Home'))
+            this.showAdAsync()
               .then(() => navigation.navigate('Home'))
           }
         }

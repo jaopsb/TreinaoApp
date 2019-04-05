@@ -1,13 +1,12 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from './HomeScreen'
-import { white, backGround } from '../colors'
+import { white, backGround, backGroundHeader } from '../colors'
 import TreinoInfo from './TreinoInfo'
 import NewExec from './NewExec'
 import EditTrenio from './EditTreino'
 import NewTreino from './NewTreino'
 import ConfigTreino from './ConfigTreino'
 import Config from './Config'
-import PrivacyPolicy from './PrivacyPolicy'
 
 const RootNavigator = createStackNavigator(
   {
@@ -53,22 +52,12 @@ const RootNavigator = createStackNavigator(
       navigationOptions: {
         title: "Configurações"
       }
-    },
-    PrivacyPolicy: {
-      screen: PrivacyPolicy,
-      navigationOptions: {
-        title: "Política de Privacidade",
-        headerTitleStyle: {
-          fontSize: 30,
-          fontWeight: 'bold'
-        }
-      }
     }
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: backGround,
+        backgroundColor: backGroundHeader,
       },
       headerTintColor: white,
       headerTitleStyle: {

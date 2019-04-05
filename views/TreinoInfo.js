@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Card } from 'react-native-material-ui'
 import Modal from 'react-native-modalbox'
 import { white, detail, green, backGround, icon, title, darkGrayBrown, } from '../colors';
+import styles from '../styles'
 import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain } from '../helpers'
 import { Feather, Ionicons } from '@expo/vector-icons'
@@ -39,7 +41,7 @@ class TreinoInfo extends React.Component {
       <View key={_id} style={{ flex: 1 }}>
         <TouchableOpacity
           onPress={() => this.openModal(description)}>
-          <View style={styles.cardContainer}>
+          <Card style={styles.cardContainer}>
             <Text style={styles.cardTitle}>{name}</Text>
             <View style={styles.cardRow}>
               <Text style={styles.cardText}>Carga: {charge}</Text>
@@ -54,7 +56,7 @@ class TreinoInfo extends React.Component {
                 <Feather name='edit' size={30} color={icon} />
               </TouchableOpacity>
             </View>
-          </View>
+          </Card>
         </TouchableOpacity>
       </View>
     )
@@ -107,106 +109,6 @@ class TreinoInfo extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: backGround,
-  },
-  backBtn: {
-    position: 'absolute',
-    top: 13,
-    left: 10
-  },
-  configBtn: {
-    position: 'absolute',
-    top: 15,
-    right: 10
-  },
-  btn: {
-    bottom: 3,
-    margin: 10,
-    justifyContent: 'flex-end'
-  },
-  btnText: {
-    fontSize: 25,
-    color: 'red',
-  },
-  modal: {
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: backGround,
-    alignItems: 'center',
-    height: 250,
-    width: 300
-  },
-  modalTitle: {
-    color: detail,
-    fontSize: 40,
-    justifyContent: 'center',
-  },
-  modalText: {
-    margin: 10,
-    fontSize: 25,
-    color: white,
-  },
-  badge: {
-    top: 1,
-    marginBottom: 5,
-    width: '100%',
-  },
-  badgeTitle: {
-    color: title,
-    fontWeight: 'bold',
-    fontSize: 50,
-    alignSelf: 'center',
-  },
-  cardContainer: {
-    margin: 5,
-    paddingTop: 5,
-    paddingLeft: 5,
-    backgroundColor: darkGrayBrown,
-    borderColor: darkGrayBrown,
-    borderWidth: 5,
-    borderRadius: 5
-  },
-  cardTitle: {
-    fontSize: 30,
-    color: white
-  },
-  cardRow: {
-    flexDirection: 'row',
-    paddingTop: 2,
-    paddingBottom: 2
-  },
-  cardText: {
-    margin: 2,
-    fontSize: 15,
-    color: white
-  },
-  editIcon: {
-    position: 'absolute',
-    right: 0,
-    bottom: 3
-  },
-  descriptionContainer: {
-    margin: 10,
-    padding: 5,
-    borderColor: white,
-    borderWidth: 1,
-  },
-  descriptionText: {
-    fontSize: 20,
-    color: white
-  },
-  submitButton: {
-    margin: 10,
-    textAlign: 'center',
-    fontSize: 30,
-    color: white,
-    backgroundColor: darkGrayBrown,
-    borderRadius: 5
-  }
-})
 
 const mapStateToProps = (state, { navigation }) => ({
   treinos: filterExecsByTrain(state, navigation.state.params.treino)

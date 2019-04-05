@@ -1,14 +1,23 @@
 import React from 'React'
-import { View, Text, TouchableOpacity, ScrollView, Linking, Button } from 'react-native'
-import Markdown from 'react-native-markdown-renderer'
+import Modal from 'react-native-modalbox'
+import { View, Text, TouchableOpacity, Linking } from 'react-native'
 import styles from '../styles'
 import { withNavigation } from 'react-navigation'
 
 class Config extends React.Component {
+  showContact = () => {
+    this.refs.modal3.open()
+  }
+  closeModal = () => this.refs.modal3.close()
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.treinoContainer}>
+        <TouchableOpacity
+          onPress={this.showContact}>
+          <Text style={styles.privacy}>Contato</Text>
+        </TouchableOpacity>
+        <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={false}>
+          <Text style={styles.modalTitle}>Contato</Text>
           <Text style={styles.textThanks}>
             {`Este aplicativo é um projeto de estudo meu em React Native e o código é aberto e está disponível `}
             <Text
@@ -23,14 +32,18 @@ te vejo por ai :),
 João Pedro de Salles Braga.`
             }
           </Text>
-        </View>
+          <TouchableOpacity
+            onPress={this.closeModal}
+            style={styles.btn}>
+            <Text style={styles.btnText}>Close</Text>
+          </TouchableOpacity>
+        </Modal>
         <TouchableOpacity
           style={{
-            flex: 1,
             justifyContent: 'flex-end',
           }}
           onPress={() => Linking.openURL('https://github.com/jaopsb/TreinaoApp/blob/master/privacy_policy.md')}>
-          <Text style={styles.submitButton}>Política de Privacidade</Text>
+          <Text style={styles.privacy}>Política de Privacidade</Text>
         </TouchableOpacity>
       </View>
     )

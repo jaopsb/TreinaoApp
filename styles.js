@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native'
-import { backGround, darkGrayBrown, detail, white, darkBackGround } from './colors';
+import { backGround, darkGrayBrown, detail, white, darkBackGround, colorInput, backGroundInput, title } from './colors';
 
 export default StyleSheet.create({
   container: {
@@ -8,9 +8,21 @@ export default StyleSheet.create({
     backgroundColor: backGround,
     flexDirection: 'column'
   },
+  inner: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   bottomBanner: {
     position: "absolute",
     bottom: 0
+  },
+  btn: {
+    bottom: 3,
+    margin: 10,
+  },
+  btnText: {
+    fontSize: 25,
+    color: 'red',
   },
   label: {
     width: '100%',
@@ -19,6 +31,24 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'black',
     top: 0,
+  },
+  modal: {
+    flexDirection: 'column',
+    backgroundColor: darkBackGround,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 600,
+    width: '80%'
+  },
+  modalTitle: {
+    color: detail,
+    fontSize: 40,
+    justifyContent: 'center',
+  },
+  modalText: {
+    margin: 5,
+    fontSize: 20,
+    color: white,
   },
   configBtn: {
     position: 'absolute',
@@ -30,13 +60,59 @@ export default StyleSheet.create({
     bottom: 60,//60,
     right: 10,
   },
-  input: {
-    fontSize: 25,
+  delIcon: {
+    position: 'absolute',
+    right: 15,
+    top: 15
+  },
+  badge: {
+    top: 1,
+    marginBottom: 5,
+    width: '100%',
+  },
+  badgeTitle: {
+    color: title,
+    fontWeight: 'bold',
+    fontSize: 50,
+    alignSelf: 'center',
+  },
+  cardContainer: {
+    margin: 5,
+    paddingTop: 5,
+    paddingLeft: 5,
     backgroundColor: darkGrayBrown,
     borderColor: darkGrayBrown,
-    borderWidth: 3,
-    borderRadius: 5,
-    color: white,
+    borderWidth: 5,
+    borderRadius: 5
+  },
+  cardTitle: {
+    fontSize: 30,
+    color: detail
+  },
+  cardRow: {
+    flexDirection: 'row',
+    paddingTop: 2,
+    paddingBottom: 2
+  },
+  cardText: {
+    margin: 2,
+    fontSize: 15,
+    color: detail
+  },
+  editIcon: {
+    position: 'absolute',
+    right: 0,
+    bottom: 3
+  },
+  input: {
+    margin: 5,
+    padding: 10
+  },
+  inputContainer: {
+    padding: 10,
+    margin: 5
+  },
+  inputDescription: {
     margin: 5,
     padding: 10
   },
@@ -55,12 +131,30 @@ export default StyleSheet.create({
   treinoContainer: {
     marginLeft: 15,
     marginRight: 15,
-    marginTop: 10,
+    marginTop: 5,
+    marginBottom: 5,
     padding: 5,
-    backgroundColor: darkGrayBrown,
-    borderColor: darkGrayBrown,
+    borderColor: detail,
     borderWidth: 3,
-    borderRadius: 5
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    shadowColor: 'red',
+    shadowOffset: { height: 0, width: 0 },
+    backgroundColor: backGround,
+  },
+  treinoTitle: {
+    fontSize: 50,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: title
+  },
+  typeContainer: {
+    flexDirection: 'row'
+  },
+  typeText: {
+    textAlign: 'center',
+    color: detail,
+    fontSize: 20,
   },
   submitButton: {
     margin: 30,
@@ -104,5 +198,11 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     color: 'red'
+  },
+  privacy: {
+    fontSize: 15,
+    color: detail,
+    textAlign: 'center',
+    margin: 15
   }
 })

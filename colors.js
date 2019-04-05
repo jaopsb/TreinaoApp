@@ -20,8 +20,13 @@ export const goldBrown = '#ffff80' //'#ffbd80''#a9d6bf''#d6d6a9''#ffff80'
 export const lightGreen = '#a9d6a9' //'#bfff80'
 
 
-export const backGround = grayBrown
-export const darkBackGround = darkGrayBrown
+export const backgroundColorStatusBar = darkGrayBrown
+export const backGroundInput = 'white'
+export const colorInput = 'black'
+export const colorIcon = 'green'
+export const backGround = '#E6E6E6'//grayBrown
+export const backGroundHeader = darkGrayBrown
+export const darkBackGround = 'gray'//darkGrayBrown
 export const detail = 'black'
 export const icon = 'black'
 export const title = lightBrown
