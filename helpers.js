@@ -37,7 +37,38 @@ export const emptyExercicio = {
   owner: ''
 }
 
-export const emptyCofig = {
+export const emptyTracker = {
+  dom: {
+    name: "Domingo",
+    train: []
+  },
+  seg: {
+    name: "Segunda",
+    train: []
+  },
+  ter: {
+    name: "Terça",
+    train: []
+  },
+  qua: {
+    name: "Quarta",
+    train: []
+  },
+  qui: {
+    name: "Quinta",
+    train: []
+  },
+  sex: {
+    name: "Sexta",
+    train: []
+  },
+  sab: {
+    name: "Sabado",
+    train: []
+  }
+}
+
+export const emptyConfig = {
   theme: 0
 }
 
@@ -79,7 +110,7 @@ export const checkPropertyState = (data) => {
   )
 }
 
-export const setDefaultStateValue = () => ({ config: {}, tracker: {}, treinos: [] })
+export const setDefaultStateValue = () => ({ config: emptyConfig, tracker: emptyTracker, treinos: [] })
 
 /* valida se todos os campos obrigatorios do exercicio estao preenchidos */
 //TODO:  RETIRAR VALIDACAO DE _ID E DE OWNER,TEM QUE ESTAR PREENCHIDAS
@@ -106,6 +137,24 @@ export const getTitles = (treino, train) => {
       exec.name :
       null
   ).filter(exec => exec !== null)
+}
+
+export const filterTrackerByTrain = (tracker, train) => {
+  //console.log('filterTrackerByTrain tracker', tracker)
+  //console.log('filterTrackerByTrain train', train)
+
+  if (tracker.lenght === 0) return
+  //seleciona os trackers que tem pelo menos um treino
+  const chave = Object.keys(tracker).filter(key => tracker[key].train.lenght > 0)
+
+  //nao sao nulos
+  //console.log('filterTrackerByTrain chave', chave)
+
+  //filtra se dentro dos trackers que tem um treino,existe o treino procurado
+  //se sim, salva ele no array e devolve
+  const result = chave.filter(ch => tracker[ch].train.includes(train))
+  //console.log('filterTrackerByTrain result', result)
+  return result
 }
 
 /* filterExecsByTrain - filtra os exercicios pelo nome do treino*/

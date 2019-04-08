@@ -53,11 +53,10 @@ class HomeScreen extends React.Component {
           <Text style={styles.logoTitle}>Treinão App</Text>
         </View>
         <TouchableOpacity
-          style={styles.configBtn}
-          onPress={() => navigation.navigate('Config')}>
-          <Ionicons name='md-settings' color={"black"} size={50} />
+          style={styles.menu}
+          onPress={() => navigation.openDrawer()}>
+          <Ionicons name='md-menu' color={"black"} size={40} />
         </TouchableOpacity>
-
         <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
           <Text style={styles.modalTitle}>Exercicios</Text>
           {
@@ -104,6 +103,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'flex-end'
   },
+  menu: {
+    position: 'absolute',
+    top: 15,
+    left: 15,
+  },
   configBtn: {
     position: 'absolute',
     top: 15,
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     top: 15,
-    left: 15
+    right: 10
   },
   logoContainer: {
     alignItems: 'center',

@@ -2,7 +2,7 @@
   "tracker": {
     "dom": {
       "name": "Domingo",
-      "train": null
+      "train": []
     },
     "seg": {
       "name": "Segunda",
@@ -12,7 +12,7 @@
     },
     "ter": {
       "name": "Terça",
-      "train": null
+      "train": []
     },
     "qua": {
       "name": "Quarta",
@@ -22,7 +22,7 @@
     },
     "qui": {
       "name": "Quinta",
-      "train": null
+      "train": []
     },
     "sex": {
       "name": "Sexta",
@@ -32,7 +32,9 @@
     },
     "sab": {
       "name": "Sabado",
-      "train": null
+      "train": [
+        "A"
+      ]
     }
   },
   "config": {

@@ -1,40 +1,10 @@
 import { DEFAULT_VALUES, ADD_TRACKER, ADD_TRAIN, DEL_TRAIN } from "../actions";
+import { emptyTracker } from "../../helpers";
 
-export default (state = {}, action) => {
+export default (state = emptyTracker, action) => {
   switch (action.type) {
     case DEFAULT_VALUES:
-      return {
-        dom: {
-          name: 'Domingo',
-          train: null
-        },
-        seg: {
-          name: 'Segunda',
-          train: null
-        },
-        ter: {
-          name: 'Terça',
-          train: null
-        },
-        qua: {
-          name: 'Quarta',
-          train: null
-        },
-        qui: {
-          name: 'Quinta',
-          train: null
-        },
-        sex: {
-          name: 'Sexa',
-          train: null
-        },
-        sab: {
-          name: 'Sabado',
-          train: null
-        },
-
-      }
-
+      return emptyTracker
     case ADD_TRACKER:
       return action.tracker
 

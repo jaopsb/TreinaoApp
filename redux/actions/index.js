@@ -46,7 +46,9 @@ export const delExec = (id) => ({
   type: DEL_EXEC,
   id
 })
+//execs
 
+//shared
 export const handleInitalData = () => {
   return function (dispatch) {
     return API.getExecs()
@@ -94,7 +96,9 @@ export const handleInitalDummyData = () => {
       )
   }
 }
+//shared
 
+//execs
 export const handleAddExecs = (execs) => {
   return function (dispatch) {
     return API.setExecs(execs)
