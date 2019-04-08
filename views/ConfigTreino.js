@@ -34,6 +34,7 @@ class ConfigTreino extends React.Component {
     await AdMobInterstitial.showAdAsync();
 
   }
+
   changeTrainName = () => {
     const { treino } = this.state
     const { treinos, treinoAntigo, dispatch, navigation } = this.props

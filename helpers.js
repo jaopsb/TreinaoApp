@@ -37,6 +37,10 @@ export const emptyExercicio = {
   owner: ''
 }
 
+export const emptyCofig = {
+  theme: 0
+}
+
 export const execNameKeys = {
   "rep": 'Repetições',
   "charge": 'Carga',
@@ -66,6 +70,16 @@ export const validaEmail = (email) => isEmail(email)
 export const validaUser = (user) => {
   return Object.keys(user).filter(key => key !== '_id' && user[key] === '')
 }
+
+export const checkPropertyState = (data) => {
+  return (
+    data.hasOwnProperty('config') &&
+    data.hasOwnProperty('tracker') &&
+    data.hasOwnProperty('treinos')
+  )
+}
+
+export const setDefaultStateValue = () => ({ config: {}, tracker: {}, treinos: [] })
 
 /* valida se todos os campos obrigatorios do exercicio estao preenchidos */
 //TODO:  RETIRAR VALIDACAO DE _ID E DE OWNER,TEM QUE ESTAR PREENCHIDAS

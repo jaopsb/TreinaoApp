@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from './HomeScreen'
 import { white, backGround, backGroundHeader } from '../colors'
 import TreinoInfo from './TreinoInfo'
@@ -7,11 +7,23 @@ import EditTrenio from './EditTreino'
 import NewTreino from './NewTreino'
 import ConfigTreino from './ConfigTreino'
 import Config from './Config'
+import Treinar from './Treniar';
+
+const Tabs = createBottomTabNavigator(
+  {
+    Treinos: {
+      screen: HomeScreen
+    },
+    Treinar: {
+      screen: Treinar
+    }
+  }
+)
 
 const RootNavigator = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: Tabs,
       navigationOptions: {
         header: null
       },

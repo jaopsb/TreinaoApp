@@ -19,4 +19,4 @@ const saver = (store) => (next) => (action) => {
   return returnValue
 }
 
-export default applyMiddleware(thunk, saver)
+export default applyMiddleware(thunk, logger, saver)

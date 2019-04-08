@@ -13,36 +13,54 @@ class Treinos extends React.Component {
 
   renderItem = ({ item }) => {
     const { navigation, showSneakPeek } = this.props
+    const key = Object.keys(item)[0]//nome do treino
     return (
-      Object.keys(item).map(key => (
-        <Card key={`${key}`} >
-          <TouchableOpacity
-            onLongPress={() => showSneakPeek(key)}
-            onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
-            <Text style={styles.treinoTitle}>{key}</Text>
-            <View style={{ margin: 10 }}>
-              {
-                item[key].map(type => (
-                  <Text key={type + key}
-                    style={styles.typeText}>{type}</Text>
-                ))
-              }
-            </View>
-          </TouchableOpacity>
-        </Card>
-      ))
+      <TouchableOpacity
+        key={`${key}`} style={styles.treinoContainer}
+        onLongPress={() => showSneakPeek(key)}
+        onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
+        {
+          item.day &&
+          <View style={styles.badgeTrackerContainer}>
+            {
+              item.day.map((d, index) =>
+                <Text key={`${key}_${d}_${index}`} style={styles.badgeTracker}>{d}</Text>
+              )
+            }
+          </View>
+        }
+        <Text style={styles.treinoTitle}>{key}</Text>
+        <View style={{ margin: 10 }}>
+          {
+            item[key].map(type => (
+              <Text key={type + key}
+                style={styles.typeText}>{type}</Text>
+            ))
+          }
+        </View>
+      </TouchableOpacity>
     )
   }
 
   render() {
-    const { treinos } = this.props
+    const { treinos, tracker } = this.props
+
+    const treinosComTracker = treinos.map(tr => {
+      const chave = Object.keys(tracker)
+      //filtra o tracker para buscar todos os dias que tem o treino 
+      tr.day = chave
+        .filter(ch => tracker[ch].train !== null
+          && tracker[ch].train.find(name => Object.keys(tr)[0] === name))
+      return tr
+    })
+
     return (
       <ScrollView>
         {
           treinos.length > 0 ?
             < FlatList
               style={{ flex: 1, padding: 14 }}
-              data={treinos}
+              data={treinosComTracker}
               keyExtractor={this.keyExtractor}
               renderItem={this.renderItem} />
             :
@@ -53,8 +71,9 @@ class Treinos extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  treinos: getListTrainAndTypes(state)
+const mapStateToProps = ({ treinos, tracker }) => ({
+  tracker,
+  treinos: getListTrainAndTypes(treinos)
 })
 
 export default withNavigation(connect(mapStateToProps)(Treinos))

@@ -181,13 +181,14 @@ const styles = StyleSheet.create({
 
 })
 
-const mapStateToProps = (state) => ({
-  carregando: state.length === 0,
-  treinos: state.filter(exec => exec.deleted === false)
+const mapStateToProps = ({ treinos, tracker }) => ({
+  carregando: treinos.length === 0,
+  tracker,
+  treinos
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getInitialData: () => dispatch(handleInitalData())
+  getInitialData: () => dispatch(handleInitalDummyData())
 
 })
 
