@@ -117,11 +117,11 @@ class ConfigTreino extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({ treinos }, props) => {
   const treinoAntigo = props.navigation.state.params.treino
   return ({
     treinoAntigo,
-    treinos: state.filter(exec => exec.train === treinoAntigo)
+    treinos: treinos.filter(exec => exec.train === treinoAntigo)
   })
 }
 

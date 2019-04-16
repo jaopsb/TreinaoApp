@@ -137,7 +137,7 @@ export const addTraker = (tracker) => ({
   tracker
 })
 
-export const deltrain = (day, train) => ({
+export const delTrain = (day, train) => ({
   type: DEL_TRAIN,
   day,
   train

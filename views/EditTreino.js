@@ -233,9 +233,9 @@ class EditTrenio extends React.Component {
   }
 }
 
-const mapStateToProps = (state, { navigation }) => ({
-  treinoLenght: state.length,
-  exercicio: state.find(exec => exec._id === navigation.state.params.id)
+const mapStateToProps = ({ treinos }, { navigation }) => ({
+  treinoLenght: treinos.length,
+  exercicio: treinos.find(exec => exec._id === navigation.state.params.id)
 })
 
 const mapDispatchToProps = (dispatch) => ({

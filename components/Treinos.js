@@ -1,10 +1,9 @@
 import React from 'react'
 import dummy from '../Dummy.json'
 import { connect } from 'react-redux'
-import { Card } from 'react-native-material-ui'
 import { withNavigation } from 'react-navigation'
 import { ScrollView, FlatList, View, Text, TouchableOpacity } from 'react-native'
-import { getListTrainAndTypes } from '../helpers';
+import { getListTrainAndTypes, testTracker } from '../helpers';
 import styles from '../styles'
 
 class Treinos extends React.Component {
@@ -19,25 +18,30 @@ class Treinos extends React.Component {
         key={`${key}`} style={styles.treinoContainer}
         onLongPress={() => showSneakPeek(key)}
         onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
+        <View style={styles.grid}>
+          <Text style={styles.treinoTitle}>{key}</Text>
+          <View style={{ flexDirection: 'column', margin: 5 }} >
+            {
+              item[key]
+                .map(type => (
+                  <Text
+                    key={type + key}
+                    style={styles.typeText}>{type}</Text>
+                ))}
+          </View>
+        </View>
         {
           item.day &&
           <View style={styles.badgeTrackerContainer}>
             {
-              item.day.map((d, index) =>
-                <Text key={`${key}_${d}_${index}`} style={styles.badgeTracker}>{d}</Text>
-              )
+              item.day
+                .sort((a, b) => a.id - b.id)
+                .map((d, index) =>
+                  <Text key={`${key}_${d.name}_${index}`} style={styles.badgeTracker}>{d.day}</Text>
+                )
             }
           </View>
         }
-        <Text style={styles.treinoTitle}>{key}</Text>
-        <View style={{ margin: 10 }}>
-          {
-            item[key].map(type => (
-              <Text key={type + key}
-                style={styles.typeText}>{type}</Text>
-            ))
-          }
-        </View>
       </TouchableOpacity>
     )
   }
@@ -49,10 +53,14 @@ class Treinos extends React.Component {
       const chave = Object.keys(tracker)
       //filtra o tracker para buscar todos os dias que tem o treino 
       tr.day = chave
-        .filter(ch => tracker[ch].train !== null
-          && tracker[ch].train.find(name => Object.keys(tr)[0] === name))
+        .filter(ch => tracker[ch].train !== null &&
+          tracker[ch].train
+            .find(name => Object.keys(tr)[0] === name))
+        .map(day => ({ day, id: tracker[day].id }))
       return tr
     })
+
+    //testTracker(treinos, tracker)
 
     return (
       <ScrollView>

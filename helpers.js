@@ -143,9 +143,9 @@ export const filterTrackerByTrain = (tracker, train) => {
   //console.log('filterTrackerByTrain tracker', tracker)
   //console.log('filterTrackerByTrain train', train)
 
-  if (tracker.lenght === 0) return
+  if (tracker.length === 0) return
   //seleciona os trackers que tem pelo menos um treino
-  const chave = Object.keys(tracker).filter(key => tracker[key].train.lenght > 0)
+  const chave = Object.keys(tracker).filter(key => tracker[key].train.length > 0)
 
   //nao sao nulos
   //console.log('filterTrackerByTrain chave', chave)
@@ -167,3 +167,19 @@ export const getListTrainAndTypes = (treinos) =>
     [treino]:
       getTypes(filterExecsByTrain(treinos, treino))
   }))
+
+export const testTracker = (treinos, tracker) => {
+  treinos.map(tr => {
+    const chave = Object.keys(tracker)
+    //filtra o tracker para buscar todos os dias que tem o treino 
+    console.log('testTracker tracker', tracker)
+    console.log('testTracker chave', chave)
+    tr.day = chave
+      .filter(ch => tracker[ch].train !== null &&
+        tracker[ch].train
+          .find(name => Object.keys(tr)[0] === name))
+      .map(day => ({ day, id: tracker[day].id }))
+    console.log('testTracker  tr', tr)
+    return tr
+  })
+}

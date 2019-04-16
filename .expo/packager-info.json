@@ -1,9 +1,9 @@
 {
-  "packagerPort": 19001,
-  "packagerPid": 17028,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://aj-mx2.jaopsb.treinaoapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.aj-mx2.jaopsb.treinaoapp.exp.direct",
-  "ngrokPid": 10188,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002
 }

@@ -45,12 +45,10 @@ class HomeScreen extends React.Component {
     const { treinos, navigation } = this.props
     return (
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/dumbell.png')}
-          />
-          <Text style={styles.logoTitle}>Treinão App</Text>
+        <View>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
+            TREINOS
+         </Text>
         </View>
         <TouchableOpacity
           style={styles.menu}
@@ -192,7 +190,7 @@ const mapStateToProps = ({ treinos, tracker }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getInitialData: () => dispatch(handleInitalDummyData())
+  getInitialData: () => dispatch(handleInitalData())
 
 })
 

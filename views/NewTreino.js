@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state) => ({
-  treinos: getTrains(state)
+const mapStateToProps = ({ treinos }) => ({
+  treinos: getTrains(treinos)
 })
 
 export default connect(mapStateToProps)(NewTreino)

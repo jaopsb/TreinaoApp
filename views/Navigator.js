@@ -8,6 +8,7 @@ import NewTreino from './NewTreino'
 import ConfigTreino from './ConfigTreino'
 import Config from './Config'
 import Treinar from './Treniar';
+import SideMenu from '../components/SideMenu';
 
 const Tabs = createDrawerNavigator(
   {
@@ -20,6 +21,9 @@ const Tabs = createDrawerNavigator(
     Configuracoes: {
       screen: Config
     }
+  },
+  {
+    contentComponent: SideMenu
   }
 )
 

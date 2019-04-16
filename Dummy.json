@@ -1,36 +1,43 @@
 {
   "tracker": {
     "dom": {
+      "id": 0,
       "name": "Domingo",
       "train": []
     },
     "seg": {
+      "id": 1,
       "name": "Segunda",
       "train": [
         "A"
       ]
     },
     "ter": {
+      "id": 2,
       "name": "Terça",
       "train": []
     },
     "qua": {
+      "id": 3,
       "name": "Quarta",
       "train": [
         "B"
       ]
     },
     "qui": {
+      "id": 4,
       "name": "Quinta",
       "train": []
     },
     "sex": {
+      "id": 5,
       "name": "Sexta",
       "train": [
         "C"
       ]
     },
     "sab": {
+      "id": 6,
       "name": "Sabado",
       "train": [
         "A"

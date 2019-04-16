@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'react-native-material-ui'
 import Modal from 'react-native-modalbox'
 import { white, detail, green, backGround, icon, title, darkGrayBrown, } from '../colors';
 import styles from '../styles'
 import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain, filterTrackerByTrain } from '../helpers'
 import { Feather, Ionicons } from '@expo/vector-icons'
-import { addTrain } from '../redux/actions';
+import { addTrain, delTrain } from '../redux/actions';
 
 const week = ["dom", "seg", "ter", "qua", "qui", "sex", "sab"]
 
@@ -25,6 +24,12 @@ class TreinoInfo extends React.Component {
     this.setState({ tracker })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { tracker } = nextProps
+
+    this.setState({ tracker })
+  }
+
   toggleDescription = (description) => {
     Alert.alert(
       'Descrição do Exercicio',
@@ -37,7 +42,13 @@ class TreinoInfo extends React.Component {
 
   toggleTracker = (day) => {
     const { treino } = this.props.navigation.state.params
-    this.props.dispatch(addTrain(day, treino))
+    const { tracker } = this.state
+
+    if (tracker.includes(day)) {
+      this.props.dispatch(delTrain(day, treino))
+    } else {
+      this.props.dispatch(addTrain(day, treino))
+    }
   }
 
   openModal = (description) => {
@@ -55,7 +66,7 @@ class TreinoInfo extends React.Component {
       <View key={_id} style={{ flex: 1 }}>
         <TouchableOpacity
           onPress={() => this.openModal(description)}>
-          <Card style={styles.cardContainer}>
+          <View style={styles.treinoContainer}>
             <Text style={styles.cardTitle}>{name}</Text>
             <View style={styles.cardRow}>
               <Text style={styles.cardText}>Carga: {charge}</Text>
@@ -65,7 +76,7 @@ class TreinoInfo extends React.Component {
             <View style={styles.cardRow}>
               <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
             </View>
-          </Card>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.editIcon}
@@ -96,7 +107,7 @@ class TreinoInfo extends React.Component {
           <Ionicons name='md-settings' color={"black"} size={40} />
         </TouchableOpacity>
 
-        <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+        <View style={styles.trackerContainer}>
           {
             //verifica se algum dia da semana existe no tracker
             //se existe, o treino esta marcado para esse dia
@@ -128,7 +139,7 @@ class TreinoInfo extends React.Component {
 
         <ScrollView>
           <FlatList
-            style={{ flex: 1, margin: 5 }}
+            style={{ flex: 1, margin: 10 }}
             data={treinos}
             keyExtractor={this.keyExtractor}
             renderItem={this.renderItem}

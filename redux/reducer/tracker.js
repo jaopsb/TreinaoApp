@@ -25,7 +25,8 @@ export default (state = emptyTracker, action) => {
         ...state,
         [action.day]: {
           ...state[action.day],
-          train: state[action.day].filter(tr => tr !== action.train)
+          train: state[action.day].train
+            .filter(tr => tr !== action.train)
         }
       }
     default:

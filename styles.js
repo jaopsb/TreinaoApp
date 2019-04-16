@@ -71,9 +71,9 @@ export default StyleSheet.create({
     width: '100%',
   },
   badgeTrackerContainer: {
-    position: 'absolute',
-    top: 2,
-    right: 10,
+    flexDirection: 'row',
+    bottom: 0,
+    justifyContent: 'flex-end',
   },
   badgeTracker: {
     textAlign: 'center',
@@ -132,7 +132,7 @@ export default StyleSheet.create({
   editIcon: {
     position: 'absolute',
     right: 7,
-    top: 5
+    top: 7
   },
   input: {
     margin: 5,
@@ -146,6 +146,22 @@ export default StyleSheet.create({
     margin: 5,
     padding: 10
   },
+  logoContainer: {
+    flexDirection: 'row',
+    backgroundColor: darkGrayBrown,
+    alignItems: 'center',
+    margin: 5
+  },
+  logo: {
+    margin: 5,
+    width: 80,
+    height: 80
+  },
+  logoTitle: {
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
   picker: {
     marginLeft: 5,
     marginRight: 5,
@@ -158,20 +174,33 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: white
   },
+  grid: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: 3,
+  },
+  trackerContainer: {
+    justifyContent: 'space-around',
+    margin: 10,
+    flexDirection: 'row'
+  },
   treinoContainer: {
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 5,
+    marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
     padding: 5,
-    borderColor: detail,
-    borderBottomWidth: 3,
-    backgroundColor: backGround,
+    borderColor: 'gray',
+    borderRadius: 5,
+    borderWidth: 1
   },
   treinoTitle: {
+    width: '20%',
     fontSize: 50,
-    textAlign: 'center',
+    justifyContent: 'flex-start',
     fontWeight: 'bold',
+    //borderColor: 'gray',
+    //borderRightWidth: 2,
     color: title
   },
   typeContainer: {
@@ -183,7 +212,7 @@ export default StyleSheet.create({
     fontSize: 20,
   },
   submitButton: {
-    margin: 30,
+    margin: 10,
     textAlign: 'center',
     fontSize: 30,
     color: white,
@@ -195,14 +224,6 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     color: white,
-    backgroundColor: detail,
-    borderRadius: 5
-  },
-  submitButton: {
-    margin: 30,
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
     backgroundColor: detail,
     borderRadius: 5
   },
@@ -218,6 +239,13 @@ export default StyleSheet.create({
     fontSize: 20,
     color: white,
     padding: 10,
+  },
+  sideMenuContainer: {
+    margin: 10,
+  },
+  sideMenuText: {
+    fontSize: 15,
+    fontWeight: 'bold'
   },
   delButton: {
     margin: 2,
