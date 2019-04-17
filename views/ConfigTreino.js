@@ -87,6 +87,7 @@ class ConfigTreino extends React.Component {
 
             this.showAdAsync()
               .then(() => navigation.navigate('Home'))
+              .catch(() => navigation.navigate('Home'))
           }
         }
       ]

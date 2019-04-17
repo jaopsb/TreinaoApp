@@ -16,7 +16,10 @@ import { TextField } from 'react-native-material-textfield'
 import { validaExec, execNameKeys } from '../helpers'
 import { editExec, handleEditExec, delExec } from '../redux/actions'
 import styles from '../styles';
+import { AdMobInterstitial } from 'expo-ads-admob';
+import { testeInterBannerUnitId, interBannerFreeUnitId } from '../helpers';
 
+AdMobInterstitial.setAdUnitID(interBannerFreeUnitId)
 const KEYBOARD_VERTICAL_OFFSET = Header.HEIGHT + StatusBar.currentHeight;
 
 class EditTrenio extends React.Component {
@@ -35,6 +38,11 @@ class EditTrenio extends React.Component {
   componentDidMount() {
     const { exercicio } = this.props
     this.setState({ exercicio })
+  }
+
+  showAdAsync = async () => {
+    await AdMobInterstitial.requestAdAsync();
+    await AdMobInterstitial.showAdAsync();
   }
 
   //funcoes de mudanca de estado para cada letra inserida/retirada no input
@@ -135,13 +143,28 @@ class EditTrenio extends React.Component {
           onPress: () => {
 
             dispatch(delExec(exercicio._id))
-            navigation.navigate(
-              url,
-              //define parametro se existe mais exercicios no treino, chama a tela de info
-              treinoLenght > 1 ?
-                { treino: exercicio.train } :
-                null
-            )
+
+            this.showAdAsync()
+              .then(() => {
+                navigation.navigate(
+                  url,
+                  //define parametro se existe mais exercicios no treino, chama a tela de info
+                  treinoLenght > 1 ?
+                    { treino: exercicio.train } :
+                    null
+                )
+              })
+              .catch(() => {
+                navigation.navigate(
+                  url,
+                  //define parametro se existe mais exercicios no treino, chama a tela de info
+                  treinoLenght > 1 ?
+                    { treino: exercicio.train } :
+                    null
+                )
+              })
+
+
           }
         },
         {
@@ -160,15 +183,14 @@ class EditTrenio extends React.Component {
         behavior='padding'
         keyboardVerticalOffset={KEYBOARD_VERTICAL_OFFSET}
         style={styles.container}>
-        <ScrollView style={{ flex: 1 }}>
+        <TouchableOpacity
+          style={styles.delIcon}
+          onPress={this.onDelete}>
+          <AntDesign name='delete' size={30} color='red' />
+        </TouchableOpacity>
+        <ScrollView style={{ flex: 1, marginTop: 5 }}>
           <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.inner}>
-              <TouchableOpacity
-                style={styles.delIcon}
-                onPress={this.onDelete}>
-                <AntDesign name='delete' size={30} color='red' />
-              </TouchableOpacity>
-
               <TextField
                 style={styles.input}
                 containerStyle={styles.inputContainer}

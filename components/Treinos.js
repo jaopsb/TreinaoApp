@@ -18,8 +18,19 @@ class Treinos extends React.Component {
         key={`${key}`} style={styles.treinoContainer}
         onLongPress={() => showSneakPeek(key)}
         onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
-        <View style={styles.grid}>
-          <Text style={styles.treinoTitle}>{key}</Text>
+        <View style={
+          key.length > 4 ?
+            styles.gridCol :
+            styles.gridRow
+        }>
+          <Text style={
+            key.length > 4 ?
+              {
+                ...styles.treinoTitle,
+                width: '100%'
+              } :
+              styles.treinoTitle
+          }>{key}</Text>
           <View style={{ flexDirection: 'column', margin: 5 }} >
             {
               item[key]
@@ -66,8 +77,8 @@ class Treinos extends React.Component {
       <ScrollView>
         {
           treinos.length > 0 ?
-            < FlatList
-              style={{ flex: 1, padding: 14 }}
+            <FlatList
+              style={{ flex: 1, margin: 10 }}
               data={treinosComTracker}
               keyExtractor={this.keyExtractor}
               renderItem={this.renderItem} />

@@ -1,8 +1,9 @@
 import React from 'React'
 import Modal from 'react-native-modalbox'
-import { View, Text, TouchableOpacity, Linking } from 'react-native'
+import { Image, View, Text, TouchableOpacity, Linking } from 'react-native'
 import styles from '../styles'
 import { withNavigation } from 'react-navigation'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 class Config extends React.Component {
   showContact = () => {
@@ -12,6 +13,18 @@ class Config extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.menu}
+          onPress={() => this.props.navigation.openDrawer()}>
+          <Ionicons name='md-menu' color={"black"} size={40} />
+        </TouchableOpacity>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/dumbell.png')}
+          />
+          <Text style={styles.logoTitle}>Treinão App</Text>
+        </View>
         <TouchableOpacity
           onPress={this.showContact}>
           <Text style={styles.privacy}>Contato</Text>
@@ -42,7 +55,7 @@ João Pedro de Salles Braga.`
           style={{
             justifyContent: 'flex-end',
           }}
-          onPress={() => Linking.openURL('https://github.com/jaopsb/TreinaoApp/blob/master/privacy_policy.md')}>
+          onPress={() => Linking.openURL('https://sites.google.com/view/treinaoapp/privacy-policy')}>
           <Text style={styles.privacy}>Política de Privacidade</Text>
         </TouchableOpacity>
       </View>

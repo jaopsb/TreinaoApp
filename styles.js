@@ -61,9 +61,8 @@ export default StyleSheet.create({
     right: 10,
   },
   delIcon: {
-    position: 'absolute',
-    right: 15,
-    top: 15
+    right: 5,
+    margin: 5
   },
   badge: {
     top: 1,
@@ -149,7 +148,8 @@ export default StyleSheet.create({
   logoContainer: {
     flexDirection: 'row',
     backgroundColor: darkGrayBrown,
-    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
     margin: 5
   },
   logo: {
@@ -161,6 +161,9 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  menu: {
+    margin: 15
   },
   picker: {
     marginLeft: 5,
@@ -174,9 +177,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: white
   },
-  grid: {
+  gridRow: {
     flex: 1,
     flexDirection: 'row',
+    margin: 3,
+  },
+  gridCol: {
+    flex: 1,
+    flexDirection: 'column',
     margin: 3,
   },
   trackerContainer: {
@@ -185,22 +193,18 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   treinoContainer: {
-    marginLeft: 5,
-    marginRight: 5,
     marginTop: 5,
     marginBottom: 5,
-    padding: 5,
+    padding: 15,
     borderColor: 'gray',
     borderRadius: 5,
     borderWidth: 1
   },
   treinoTitle: {
     width: '20%',
-    fontSize: 50,
+    fontSize: 30,
     justifyContent: 'flex-start',
     fontWeight: 'bold',
-    //borderColor: 'gray',
-    //borderRightWidth: 2,
     color: title
   },
   typeContainer: {
