@@ -71,8 +71,7 @@ class Treinos extends React.Component {
       return tr
     })
 
-    //testTracker(treinos, tracker)
-
+    console.log('Treinos', treinosComTracker)
     return (
       <ScrollView>
         {

@@ -186,7 +186,7 @@ class EditTrenio extends React.Component {
         <TouchableOpacity
           style={styles.delIcon}
           onPress={this.onDelete}>
-          <AntDesign name='delete' size={30} color='red' />
+          <AntDesign name='delete' size={45} color='red' />
         </TouchableOpacity>
         <ScrollView style={{ flex: 1, marginTop: 5 }}>
           <SafeAreaView style={{ flex: 1 }}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Alert, View, TextInput, TouchableOpacity, Text } from 'react-native'
+import { TextField } from 'react-native-material-textfield'
+import { Alert, View, TouchableOpacity, Text } from 'react-native'
 import styles from '../styles'
 import { delExec, editExec } from '../redux/actions';
 import { AdMobInterstitial } from 'expo-ads-admob';
@@ -98,21 +99,26 @@ class ConfigTreino extends React.Component {
     const { treino } = this.state
     return (
       <View style={styles.container}>
-        <TextInput
-          style={[styles.input, { marginTop: 40 }]}
-          placeholder='Nome do Treino'
-          value={treino}
-          onChangeText={this.handleChangeName} />
+        <View style={{ margin: 10 }}>
+          <TextField
+            style={styles.input}
+            label='Nome do Treino'
+            value={treino}
+            numberOfLines={1}
+            multiline={true}
+            returnKeyType='default'
+            onChangeText={this.handleChangeName} />
 
-        <TouchableOpacity
-          onPress={this.changeTrainName}>
-          <Text style={styles.submitButton}>Editar</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.changeTrainName}>
+            <Text style={styles.submitButton}>Editar</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={this.deleteTrain}>
-          <Text style={styles.delButton}>Excluir Treino</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.deleteTrain}>
+            <Text style={styles.delButton}>Excluir Treino</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

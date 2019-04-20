@@ -37,7 +37,7 @@ export default StyleSheet.create({
     backgroundColor: darkBackGround,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 600,
+    height: 500,
     width: '80%'
   },
   modalTitle: {
@@ -61,8 +61,9 @@ export default StyleSheet.create({
     right: 10,
   },
   delIcon: {
-    right: 5,
-    margin: 5
+    alignItems: 'flex-end',
+    top: 10,
+    right: 10,
   },
   badge: {
     top: 1,
@@ -113,25 +114,21 @@ export default StyleSheet.create({
     borderRadius: 10
   },
   cardTitle: {
-    marginLeft: 10,
-    fontSize: 30,
+    fontSize: 35,
     color: detail
   },
   cardRow: {
-    flexDirection: 'row',
-    paddingTop: 2,
+    flexDirection: 'column',
     margin: 10,
-    paddingBottom: 2
   },
   cardText: {
-    margin: 2,
-    fontSize: 15,
+    fontSize: 20,
     color: detail
   },
   editIcon: {
-    position: 'absolute',
-    right: 7,
-    top: 7
+    alignItems: 'flex-end',
+    right: 5,
+    bottom: 5
   },
   input: {
     margin: 5,
@@ -150,7 +147,7 @@ export default StyleSheet.create({
     backgroundColor: darkGrayBrown,
     justifyContent: 'center',
     padding: 5,
-    margin: 5
+    margin: 10
   },
   logo: {
     margin: 5,
@@ -193,12 +190,16 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   treinoContainer: {
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 15,
+    padding: 10,
     borderColor: 'gray',
     borderRadius: 5,
     borderWidth: 1
+  },
+  newTreinoTitle: {
+    fontSize: 40,
+    color: title,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   treinoTitle: {
     width: '20%',
@@ -248,7 +249,7 @@ export default StyleSheet.create({
     margin: 10,
   },
   sideMenuText: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold'
   },
   delButton: {

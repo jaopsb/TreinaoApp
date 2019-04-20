@@ -2,6 +2,8 @@ import React from 'react'
 import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
+import styles from '../styles'
+import { TextField } from 'react-native-material-textfield'
 import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys, VALID_SPACE } from '../helpers';
@@ -253,43 +255,53 @@ class NewExec extends React.Component {
     const { exercicio, emMassa, veioDeNovoTreino, editando } = this.state
 
     return (
-      <ScrollView
-        style={styles.container}>
-        <KeyboardAvoidingView
-          behavior='padding'
-          keyboardVerticalOffset={Header.HEIGHT + 10}>
-          <TextInput
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={styles.container}
+        keyboardVerticalOffset={Header.HEIGHT + 30}>
+        <ScrollView
+          style={{ margin: 10 }}>
+          <Text style={styles.newTreinoTitle}>Treino: {treino}</Text>
+          <Text style={{ fontSize: 15 }}>Crie pelo menos um exercicio para salvar o treino</Text>
+          <TextField
             style={styles.input}
-            placeholder='Exercicio'
+            label='Exercicio'
+            multiline={true}
+            numberOfLines={1}
             value={exercicio.name}
             onChangeText={this.handleChangeName} />
-          <TextInput
+          <TextField
             style={styles.input}
-            placeholder='Repetições'
+            label='Repetições'
+            multiline={true}
+            numberOfLines={1}
             value={exercicio.rep}
             onChangeText={this.handleChangeRep} />
-          <TextInput
+          <TextField
             style={styles.input}
-            placeholder='Carga'
+            label='Carga'
+            multiline={true}
+            numberOfLines={1}
             value={exercicio.charge}
             onChangeText={this.handleChangeCharge} />
-          <TextInput
+          <TextField
             style={styles.input}
-            placeholder='Serie'
+            label='Serie'
             keyboardType='number-pad'
+            multiline={true}
+            numberOfLines={1}
             value={`${exercicio.serie}`}
             onChangeText={this.handleChangeSerie} />
-          <TextInput
+          <TextField
             style={styles.input}
-            placeholder='Descrição (Opcional)'
+            label='Descrição (Opcional)'
+            multiline={true}
+            numberOfLines={1}
             multiline={true}
             numberOfLines={3}
             autoCapitalize='sentences'
             value={exercicio.description}
             onChangeText={this.handleChangeDescription} />
-
-          <Text style={styles.label}>Treino</Text>
-          <Text style={[styles.input, { textAlign: 'center' }]}>{treino}</Text>
 
           <Text style={styles.label}>Grupo Muscular</Text>
           <Picker
@@ -306,22 +318,21 @@ class NewExec extends React.Component {
           {
             emMassa ?
               <View>
-
                 <TouchableOpacity
                   onPress={this.handleSaveNext}>
-                  <Text style={styles.buttonNewExec}>Salvar Exercicio e Criar mais </Text>
+                  <Text style={styles.buttonNewExec}>Salvar Exercicio </Text>
                 </TouchableOpacity>
-                {editando ?
-                  <TouchableOpacity
-                    onPress={this.handleSaveEdit}>
-                    <Text style={styles.buttonNewExec}>Editar Exercicio</Text>
-                  </TouchableOpacity> :
-                  this.state.exerciciosSalvos.length > 0 &&
-                  <TouchableOpacity
-                    onPress={veioDeNovoTreino ? this.saveAll : this.saveOne}>
-                    <Text style={styles.buttonNewExec}>Salvar Exercicios</Text>
-                  </TouchableOpacity>
-
+                {
+                  editando ?
+                    <TouchableOpacity
+                      onPress={this.handleSaveEdit}>
+                      <Text style={styles.buttonNewExec}>Editar Exercicio</Text>
+                    </TouchableOpacity> :
+                    this.state.exerciciosSalvos.length > 0 &&
+                    <TouchableOpacity
+                      onPress={veioDeNovoTreino ? this.saveAll : this.saveOne}>
+                      <Text style={styles.buttonNewExec}>Salvar Treino</Text>
+                    </TouchableOpacity>
                 }
               </View>
               :
@@ -332,74 +343,21 @@ class NewExec extends React.Component {
           }
           {
             emMassa ?
-              <Text>Lista de exercicios ja feitos</Text> &&
-              <Exercicios
-                exercicios={this.state.exerciciosSalvos}
-                handleEdit={this.handleEdit}
-              />
+              <View>
+                <Text style={{ textAlign: 'center', fontSize: 15 }}>Exercicios Criados</Text>
+                <Exercicios
+                  exercicios={this.state.exerciciosSalvos}
+                  handleEdit={this.handleEdit}
+                />
+              </View>
               : null
           }
 
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: backGround,
-    flexDirection: 'column'
-  },
-  label: {
-    width: '100%',
-    textAlign: 'center',
-    left: 5,
-    fontSize: 20,
-    color: 'black',
-    top: 0,
-  },
-  input: {
-    fontSize: 25,
-    backgroundColor: darkGrayBrown,
-    borderColor: darkGrayBrown,
-    borderWidth: 3,
-    borderRadius: 5,
-    color: white,
-    margin: 5,
-    padding: 10
-  },
-  picker: {
-    marginLeft: 5,
-    marginRight: 5,
-    height: 25,
-    width: '100%',
-    backgroundColor: backGround
-  },
-  pickerItem: {
-    fontSize: 15,
-    textAlign: 'center',
-    color: white
-  },
-  submitButton: {
-    margin: 30,
-    textAlign: 'center',
-    fontSize: 30,
-    color: white,
-    backgroundColor: detail,
-    borderRadius: 5
-  },
-  buttonNewExec: {
-    margin: 5,
-    textAlign: 'center',
-    fontSize: 30,
-    color: white,
-    backgroundColor: detail,
-    borderRadius: 5
-  }
-})
-
 
 const mapStateToProps = ({ treinos }) => ({
   treinos: getTrains(treinos)

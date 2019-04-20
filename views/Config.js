@@ -4,6 +4,8 @@ import { Image, View, Text, TouchableOpacity, Linking } from 'react-native'
 import styles from '../styles'
 import { withNavigation } from 'react-navigation'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { AdMobBanner } from 'expo-ads-admob';
+import { bannerFreeConfig } from '../helpers';
 
 class Config extends React.Component {
   showContact = () => {
@@ -58,8 +60,16 @@ João Pedro de Salles Braga.`
           onPress={() => Linking.openURL('https://sites.google.com/view/treinaoapp/privacy-policy')}>
           <Text style={styles.privacy}>Política de Privacidade</Text>
         </TouchableOpacity>
+
+        <AdMobBanner
+          bannerSize="smartBannerLandscape"
+          style={styles.bottomBanner}
+          adUnitID={bannerFreeConfig} // Test ID, Replace with your-admob-unit-id
+          testDevices={[AdMobBanner.simulatorId]}
+          didFailToReceiveAdWithError={this.bannerError} />
       </View>
     )
   }
 }
+
 export default withNavigation(Config)

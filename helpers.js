@@ -9,11 +9,14 @@ export const DESC = 'DESC'
 
 export const bannerUid = 'ca-app-pub-2940304467930014/5618424231'//antigo
 export const bannerFreeUnitId = 'ca-app-pub-2940304467930014/7961941572'
+export const bannerFreeConfig = 'ca-app-pub-2940304467930014/8437647351'
 export const interBannerFreeUnitId = 'ca-app-pub-2940304467930014/4136755947'
 
 //tests
 export const testeBannerUID = 'ca-app-pub-3940256099942544/6300978111'
 export const testeInterBannerUnitId = 'ca-app-pub-3940256099942544/1033173712'
+
+export const week = ["dom", "seg", "ter", "qua", "qui", "sex", "sab"]
 
 export const gruposMusc = [
   'Ombros',
@@ -39,30 +42,37 @@ export const emptyExercicio = {
 
 export const emptyTracker = {
   dom: {
+    id: 0,
     name: "Domingo",
     train: []
   },
   seg: {
+    id: 1,
     name: "Segunda",
     train: []
   },
   ter: {
+    id: 2,
     name: "Terça",
     train: []
   },
   qua: {
+    id: 3,
     name: "Quarta",
     train: []
   },
   qui: {
+    id: 4,
     name: "Quinta",
     train: []
   },
   sex: {
+    id: 5,
     name: "Sexta",
     train: []
   },
   sab: {
+    id: 6,
     name: "Sabado",
     train: []
   }

@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
-import { white, detail, green, backGround, icon, title, darkGrayBrown, } from '../colors';
+import { detail, icon } from '../colors';
 import styles from '../styles'
-import { ScrollView, Alert, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { ScrollView, Alert, View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain, filterTrackerByTrain } from '../helpers'
 import { Feather, Ionicons } from '@expo/vector-icons'
 import { addTrain, delTrain } from '../redux/actions';
 
 const week = ["dom", "seg", "ter", "qua", "qui", "sex", "sab"]
-
 class TreinoInfo extends React.Component {
   state = {
     description: '',
@@ -20,14 +19,23 @@ class TreinoInfo extends React.Component {
 
   componentDidMount() {
     const { tracker } = this.props
-
     this.setState({ tracker })
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { tracker } = nextProps
-
+  componentWillReceiveProps(newProps) {
+    const { tracker } = newProps
     this.setState({ tracker })
+  }
+
+  toggleTracker = (day) => {
+    const { treino } = this.props.navigation.state.params
+    const { tracker } = this.state
+
+    if (tracker.includes(day)) {
+      this.props.dispatch(delTrain(day, treino))
+    } else {
+      this.props.dispatch(addTrain(day, treino))
+    }
   }
 
   toggleDescription = (description) => {
@@ -63,25 +71,23 @@ class TreinoInfo extends React.Component {
   renderItem = ({ item }) => {
     const { _id, rep, serie, type, name, charge, description } = item
     return (
-      <View key={_id} style={{ flex: 1 }}>
+      <View key={_id} style={styles.treinoContainer}>
         <TouchableOpacity
           onPress={() => this.openModal(description)}>
-          <View style={styles.treinoContainer}>
-            <Text style={styles.cardTitle}>{name}</Text>
-            <View style={styles.cardRow}>
-              <Text style={styles.cardText}>Carga: {charge}</Text>
-              <Text style={styles.cardText}>Repetições: {rep}</Text>
-              <Text style={styles.cardText}>Series: {serie}</Text>
-            </View>
-            <View style={styles.cardRow}>
-              <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
-            </View>
+          <Text style={styles.cardTitle}>{name}</Text>
+          <View style={styles.cardRow}>
+            <Text style={styles.cardText}>Carga: {charge}</Text>
+            <Text style={styles.cardText}>Repetições: {rep}</Text>
+            <Text style={styles.cardText}>Series: {serie}</Text>
+          </View>
+          <View style={styles.cardRow}>
+            <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.editIcon}
           onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-          <Feather name='edit' size={30} color={icon} />
+          <Feather name='edit' size={45} color={icon} />
         </TouchableOpacity>
       </View>
     )

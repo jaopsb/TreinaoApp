@@ -23,7 +23,16 @@ const Tabs = createDrawerNavigator(
     }
   },
   {
-    contentComponent: SideMenu
+    contentOptions: {
+      activeTintColor: '#e91e63',
+      itemsContainerStyle: {
+        marginVertical: 0,
+      },
+      iconContainerStyle: {
+        opacity: 1
+      }
+    },
+    contentComponent: SideMenu,
   }
 )
 
@@ -80,9 +89,8 @@ const RootNavigator = createStackNavigator(
       },
       headerTintColor: white,
       headerTitleStyle: {
-        flex: 1,
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 35,
       },
     }
   }
