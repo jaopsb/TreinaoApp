@@ -4,12 +4,11 @@ import { connect } from 'react-redux'
 import { Header } from 'react-navigation'
 import styles from '../styles'
 import { TextField } from 'react-native-material-textfield'
-import { Alert, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
+import { Alert, ScrollView, KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet, TextInput, Picker } from 'react-native'
 import { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getTrains, validaExec, emptyExercicio, gruposMusc, execNameKeys, VALID_SPACE } from '../helpers';
 import Exercicios from '../components/Exercicios';
 import { addExec, addExecs } from '../redux/actions';
-import { ScrollView } from 'react-native-gesture-handler';
 
 class NewExec extends React.Component {
   state = {

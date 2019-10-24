@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import Modal from 'react-native-modalbox'
 import { Image, View, Text, TouchableOpacity, Linking } from 'react-native'
 import styles from '../styles'

@@ -3,5 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "aj-mx2"
+  "urlRandomness": "aj-mx2",
+  "https": false
 }

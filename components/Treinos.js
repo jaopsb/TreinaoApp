@@ -18,11 +18,7 @@ class Treinos extends React.Component {
         key={`${key}`} style={styles.treinoContainer}
         onLongPress={() => showSneakPeek(key)}
         onPress={() => navigation.navigate('TreinoInfo', { treino: key })}>
-        <View style={
-          key.length > 4 ?
-            styles.gridCol :
-            styles.gridRow
-        }>
+        <View style={key.length > 4 ? styles.gridCol : styles.gridRow}>
           <Text style={
             key.length > 4 ?
               {
@@ -70,8 +66,6 @@ class Treinos extends React.Component {
         .map(day => ({ day, id: tracker[day].id }))
       return tr
     })
-
-    console.log('Treinos', treinosComTracker)
     return (
       <ScrollView>
         {

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modalbox'
 import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
-import { AdMobBanner } from 'expo'
+import { AdMobBanner } from 'expo-ads-admob'
 import { getTitles, testeBannerUID, bannerUid, bannerFreeUnitId } from '../helpers.js'
 import Treinos from '../components/Treinos'
 import { handleInitalData, handleInitalDummyData } from '../redux/actions'
@@ -191,7 +191,6 @@ const mapStateToProps = ({ treinos, tracker }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getInitialData: () => dispatch(handleInitalData())
-
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

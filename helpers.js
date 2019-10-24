@@ -182,14 +182,14 @@ export const testTracker = (treinos, tracker) => {
   treinos.map(tr => {
     const chave = Object.keys(tracker)
     //filtra o tracker para buscar todos os dias que tem o treino 
-    console.log('testTracker tracker', tracker)
-    console.log('testTracker chave', chave)
+    // console.log('testTracker tracker', tracker)
+    // console.log('testTracker chave', chave)
     tr.day = chave
       .filter(ch => tracker[ch].train !== null &&
         tracker[ch].train
           .find(name => Object.keys(tr)[0] === name))
       .map(day => ({ day, id: tracker[day].id }))
-    console.log('testTracker  tr', tr)
+    // console.log('testTracker  tr', tr)
     return tr
   })
 }

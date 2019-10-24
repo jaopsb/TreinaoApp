@@ -5,7 +5,7 @@ import { detail, icon } from '../colors';
 import styles from '../styles'
 import { ScrollView, Alert, View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { filterExecsByTrain, filterTrackerByTrain } from '../helpers'
-import { Feather, Ionicons } from '@expo/vector-icons'
+import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import { addTrain, delTrain } from '../redux/actions';
 
 const week = ["dom", "seg", "ter", "qua", "qui", "sex", "sab"]
@@ -40,7 +40,7 @@ class TreinoInfo extends React.Component {
 
   toggleDescription = (description) => {
     Alert.alert(
-      'Descrição do Exercicio',
+      'Descriçã',
       description,
       [
         { text: 'ok', style: 'cancel' }
@@ -72,24 +72,24 @@ class TreinoInfo extends React.Component {
     const { _id, rep, serie, type, name, charge, description } = item
     return (
       <View key={_id} style={styles.treinoContainer}>
-        <TouchableOpacity
-          onPress={() => this.openModal(description)}>
-          <Text style={styles.cardTitle}>{name}</Text>
-          <View style={styles.cardRow}>
-            <Text style={styles.cardText}>Carga: {charge}</Text>
-            <Text style={styles.cardText}>Repetições: {rep}</Text>
-            <Text style={styles.cardText}>Series: {serie}</Text>
-          </View>
-          <View style={styles.cardRow}>
-            <Text style={styles.cardText}>Grupo Muscular: {type}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.editIcon}
-          onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-          <Feather name='edit' size={45} color={icon} />
-        </TouchableOpacity>
-      </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            style={{ flex: 1 }}
+            onLongPress={() => this.props.navigation.navigate('Edit', { id: _id })}
+            onPress={() => this.openModal(description)}>
+            <Text style={styles.cardTitle}>{name}</Text>
+            <View style={styles.cardRow}>
+              <Text style={styles.cardText}>
+                {serie}x {rep}
+                <MaterialCommunityIcons name='repeat' size={20} color='black' />
+                {'\t'}
+                {charge}
+                <MaterialCommunityIcons name='weight' size={20} color='black' />
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View >
     )
   }
 

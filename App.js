@@ -1,5 +1,5 @@
 import React from 'react';
-import { Constants } from 'expo'
+import Constants from 'expo-constants'
 import { Provider } from 'react-redux'
 import { View, StatusBar } from 'react-native'
 import configureStore from './redux/store'

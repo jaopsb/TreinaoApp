@@ -114,12 +114,13 @@ export default StyleSheet.create({
     borderRadius: 10
   },
   cardTitle: {
-    fontSize: 35,
+    fontSize: 30,
+    backgroundColor: 'yellow',
     color: detail
   },
   cardRow: {
     flexDirection: 'column',
-    margin: 10,
+    margin: 5,
   },
   cardText: {
     fontSize: 20,
@@ -127,8 +128,6 @@ export default StyleSheet.create({
   },
   editIcon: {
     alignItems: 'flex-end',
-    right: 5,
-    bottom: 5
   },
   input: {
     margin: 5,
@@ -144,7 +143,7 @@ export default StyleSheet.create({
   },
   logoContainer: {
     flexDirection: 'row',
-    backgroundColor: darkGrayBrown,
+    // backgroundColor: darkGrayBrown,
     justifyContent: 'center',
     padding: 5,
     margin: 10
@@ -191,6 +190,7 @@ export default StyleSheet.create({
   },
   treinoContainer: {
     padding: 10,
+    margin: 1,
     borderColor: 'gray',
     borderRadius: 5,
     borderWidth: 1

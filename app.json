@@ -3,7 +3,7 @@
     "name": "TreinaoApp",
     "slug": "TreinaoApp",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "35.0.0",
     "primaryColor": "#bd9875",
     "platforms": [
       "ios",
@@ -28,7 +28,7 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 5,
+      "versionCode": 6,
       "package": "com.skullte.treinaoapp",
       "permissions": []
     }
