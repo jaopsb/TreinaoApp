@@ -72,22 +72,31 @@ class TreinoInfo extends React.Component {
     const { _id, rep, serie, type, name, charge, description } = item
     return (
       <View key={_id} style={styles.treinoContainer}>
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
-            style={{ flex: 1 }}
-            onLongPress={() => this.props.navigation.navigate('Edit', { id: _id })}
-            onPress={() => this.openModal(description)}>
-            <Text style={styles.cardTitle}>{name}</Text>
-            <View style={styles.cardRow}>
-              <Text style={styles.cardText}>
-                {serie}x {rep}
-                <MaterialCommunityIcons name='repeat' size={20} color='black' />
-                {'\t'}
-                {charge}
-                <MaterialCommunityIcons name='weight' size={20} color='black' />
-              </Text>
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={styles.cardTitle}>{name}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={{ ...styles.cardText }}>
+              {serie}x {rep}
+              <MaterialCommunityIcons name='repeat' size={20} color='black' />
+              {'\t'}
+              {charge}
+              <MaterialCommunityIcons name='weight' size={20} color='black' />
+            </Text>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                onPress={() => this.openModal(description)}>
+                <Text style={{ fontSize: 20, color: 'blue', marginTop: 2, marginRight: 5, padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'blue' }}>
+                  Descrição
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
+                <Text style={{ fontSize: 20, color: 'black', marginTop: 2, padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'black' }}>
+                  Editar
+                </Text>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
       </View >
     )
@@ -121,26 +130,29 @@ class TreinoInfo extends React.Component {
               <TouchableOpacity
                 key={day}
                 onPress={() => { this.toggleTracker(day) }}>
-                <Text
-                  style={
-                    tracker.includes(day) ?
-                      styles.badgeTracker :
-                      styles.badgeTrackerEmpty
-                  }
-                >{day}</Text>
+                <Text style={tracker.includes(day) ? styles.badgeTracker : styles.badgeTrackerEmpty}>
+                  {day}
+                </Text>
               </TouchableOpacity>
             )
           }
         </View>
 
-        <Modal style={styles.modal} position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
-          <Text style={styles.modalTitle}>Descrição</Text>
-          <Text style={styles.modalText}>{this.state.description}</Text>
-          <TouchableOpacity
-            onPress={this.closeModal}
-            style={styles.btn}>
-            <Text style={styles.btnText}>Close</Text>
-          </TouchableOpacity>
+        <Modal
+          style={{
+            backgroundColor: '#FFF',
+            // flexDirection: 'column',
+            // justifyContent: 'center',
+            // alignItems: 'center',
+            height: '40%',
+            width: '80%'
+          }}
+          onPress={this.closeModal}
+          position={"center"} ref={"modal3"} isDisabled={this.state.isDisabled}>
+          <Text style={{ ...styles.modalTitle, margin: 10 }}>Descrição</Text>
+          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
+            <Text style={styles.modalText}>{this.state.description}</Text>
+          </View>
         </Modal>
 
         <ScrollView>

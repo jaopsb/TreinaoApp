@@ -33,11 +33,11 @@ export default StyleSheet.create({
     top: 0,
   },
   modal: {
+    backgroundColor: 'gray',
     flexDirection: 'column',
-    backgroundColor: darkBackGround,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 500,
+    height: 400,
     width: '80%'
   },
   modalTitle: {
@@ -46,9 +46,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   modalText: {
-    margin: 5,
+    margin: 10,
     fontSize: 20,
-    color: white,
+    color: 'blue',
   },
   configBtn: {
     position: 'absolute',

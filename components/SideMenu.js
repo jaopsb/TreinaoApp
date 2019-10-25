@@ -28,11 +28,13 @@ class SideMenu extends Component {
               Treinos
               </Text>
           </View>
+          {/* AINDA NAO FOI FEITO
           <View style={styles.sideMenuContainer}>
             <Text style={styles.sideMenuText} onPress={this.navigateToScreen('Treinar')}>
               Treinar
               </Text>
-          </View>
+          </View> 
+          */}
           <View style={styles.sideMenuContainer}>
             <Text style={styles.sideMenuText} onPress={this.navigateToScreen('Configuracoes')}>
               Configurações

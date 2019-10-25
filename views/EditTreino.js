@@ -14,7 +14,7 @@ import {
 import { AntDesign } from '@expo/vector-icons'
 import { TextField } from 'react-native-material-textfield'
 import { validaExec, execNameKeys } from '../helpers'
-import { editExec, handleEditExec, delExec } from '../redux/actions'
+import { handleEditExec, delExec } from '../redux/actions'
 import styles from '../styles';
 import { AdMobInterstitial } from 'expo-ads-admob';
 import { testeInterBannerUnitId, interBannerFreeUnitId } from '../helpers';
@@ -84,7 +84,7 @@ class EditTrenio extends React.Component {
   //verifica se as condicoes estao satisfeitas, e edita o exercicio
   onSubmit = () => {
     const { exercicio } = this.state
-    const { dispatch, navigation } = this.props
+    const { editExec, navigation } = this.props
     let arrayValida = validaExec(exercicio)
 
     if (arrayValida.length > 0) {
@@ -110,9 +110,8 @@ class EditTrenio extends React.Component {
           {
             text: 'Sim',
             onPress: () => {
-
-              dispatch(editExec(exercicio))
-                .then(() => navigation.navigate("TreinoInfo", { treino: exercicio.train }))
+              editExec(exercicio)
+              navigation.navigate("TreinoInfo", { treino: exercicio.train })
             }
           },
           {
@@ -264,4 +263,4 @@ const mapDispatchToProps = (dispatch) => ({
   editExec: (exec) => dispatch(handleEditExec(exec))
 })
 
-export default connect(mapStateToProps)(EditTrenio)
+export default connect(mapStateToProps, mapDispatchToProps)(EditTrenio)

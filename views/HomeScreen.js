@@ -49,6 +49,9 @@ class HomeScreen extends React.Component {
           <Text style={{ fontSize: 40, fontWeight: 'bold', margin: 10, textAlign: 'center' }}>
             TREINOS
          </Text>
+          <Text style={{ fontSize: 15, fontWeight: 'bold', margin: 5, textAlign: 'center' }}>
+            Sua lista de treinos
+         </Text>
         </View>
         <TouchableOpacity
           style={styles.menu}
