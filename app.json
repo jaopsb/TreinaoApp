@@ -4,7 +4,7 @@
     "slug": "TreinaoApp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "primaryColor": "gray",
+    "primaryColor": "#dfe3d5",
     "platforms": [
       "ios",
       "android"
