@@ -85,15 +85,11 @@ class TreinoInfo extends React.Component {
             <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity
                 onPress={() => this.openModal(description)}>
-                <Text style={{ fontSize: 20, color: 'blue', marginTop: 2, marginRight: 5, padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'blue' }}>
-                  Descrição
-                </Text>
+                <MaterialCommunityIcons style={{ marginRight: 10 }} name='information-outline' color='blue' size={35} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Edit', { id: _id })}>
-                <Text style={{ fontSize: 20, color: 'black', marginTop: 2, padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'black' }}>
-                  Editar
-                </Text>
+                <MaterialCommunityIcons name='circle-edit-outline' size={35} />
               </TouchableOpacity>
             </View>
           </View>

@@ -14,7 +14,7 @@
     "icon": "./assets/LogoTreinaoApp-2.png",
     "splash": {
       "image": "./assets/dumbell.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#FFF"
     },
     "updates": {

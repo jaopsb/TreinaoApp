@@ -31,3 +31,11 @@ export const detail = 'black'
 export const icon = 'black'
 export const title = 'blue' //lightGreen //lightBrown
 export const styleText = 'black'
+
+
+// COOLORS.CO - PALETTE 93
+export const darkBlue = '#072AC8'
+export const midBlue = '#1E96FC'
+export const lightBlue = '#A2D6F9'
+export const yellow = '#FCF300'
+export const orange = '#FFC600'

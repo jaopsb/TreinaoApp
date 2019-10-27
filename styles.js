@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native'
-import { backGround, darkGrayBrown, detail, white, darkBackGround, colorInput, backGroundInput, title } from './colors';
+import { backGround, darkGrayBrown, detail, white, darkBackGround, colorInput, backGroundInput, title, yellow } from './colors';
 
 export default StyleSheet.create({
   container: {
@@ -115,7 +115,7 @@ export default StyleSheet.create({
   },
   cardTitle: {
     fontSize: 30,
-    backgroundColor: 'yellow',
+    backgroundColor: yellow,
     color: detail
   },
   cardRow: {
@@ -185,7 +185,7 @@ export default StyleSheet.create({
   },
   trackerContainer: {
     justifyContent: 'space-around',
-    margin: 10,
+    margin: 5,
     flexDirection: 'row'
   },
   treinoContainer: {
